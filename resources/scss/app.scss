@@ -2,3 +2,28 @@
 @import 'admin-lte';
 @import 'bootstrap-icons';
 @import 'overlayscrollbars/styles/overlayscrollbars.css';
+
+
+
+//SiderBar
+.bg-custom-sidebar {
+    background-color:$rosa;
+    color: white;
+}
+
+.bg-custom-sidebar .nav-link,
+.bg-custom-sidebar .nav-link p,
+.bg-custom-sidebar .nav-icon {
+    color: white;
+}
+
+.bg-custom-sidebar .nav-link.active,
+.bg-custom-sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.375rem;
+    color: #fff;
+}
+
+
+
+
