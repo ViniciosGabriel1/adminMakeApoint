@@ -91,7 +91,8 @@
             <!--end::Small Box Widget 4-->
         </div>
         <!--end::Col-->
-    @livewire('counter')
+    {{-- @livewire('counter') --}}
+    @livewire('calendar')
 
     </div>
 

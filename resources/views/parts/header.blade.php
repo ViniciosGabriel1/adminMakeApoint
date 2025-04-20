@@ -1,4 +1,4 @@
-<nav class="app-header navbar navbar-expand bg-rosa">
+<nav class="app-header navbar navbar-expand">
     <!--begin::Container-->
     <div class="container-fluid">
         <!--begin::Start Navbar Links-->
