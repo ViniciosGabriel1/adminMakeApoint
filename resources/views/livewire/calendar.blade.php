@@ -1,9 +1,19 @@
 <div class="calendar-container w-full max-w-4xl mx-auto">
     <!-- Cabeçalho aumentado -->
-    <div class="calendar-header mb-6">
-        <button wire:click="previousMonth" class="calendar-nav-button text-xl p-2">&lt;</button>
-        <h2 class="calendar-title text-2xl font-bold">{{ $currentDate->format('F Y') }}</h2>
-        <button wire:click="nextMonth" class="calendar-nav-button text-xl p-2">&gt;</button>
+    <div class="calendar-header mb-8 flex items-center justify-between bg-gradient-to-r from-rosa-100 to-rosa-50 px-6 py-4 rounded-xl shadow-sm">
+        <button wire:click="previousMonth" 
+                class="calendar-nav-button flex items-center justify-center w-10 h-10 rounded-full bg-white text-rosa hover:bg-rosa hover:text-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
+            <span class="text-xl font-bold">&lt;</span>
+        </button>
+        
+        <h2 class="calendar-title text-2xl font-bold text-rosa-800 tracking-wide">
+            {{ $currentDate->format('F Y') }}
+        </h2>
+        
+        <button wire:click="nextMonth" 
+                class="calendar-nav-button flex items-center justify-center w-10 h-10 rounded-full bg-white text-rosa hover:bg-rosa hover:text-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
+            <span class="text-xl font-bold">&gt;</span>
+        </button>
     </div>
     
     <!-- Dias da semana com tamanho aumentado -->

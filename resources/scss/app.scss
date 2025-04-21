@@ -40,7 +40,7 @@ $rosa-800: #9f1239;
 /* ESTRUTURA DO CALENDÁRIO */
 /* ==================== */
 .calendar-container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     font-family: Arial, sans-serif;
 }
@@ -257,16 +257,49 @@ $rosa-800: #9f1239;
 /* ==================== */
 /* BOTÕES DE NAVEGAÇÃO */
 /* ==================== */
-.calendar-nav-button {
-    background: $rosa;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-
-    &:hover {
-        background: darken($rosa, 10%);
+/* ==================== */
+/* CALENDAR HEADER */
+/* ==================== */
+.calendar-header {
+    background: linear-gradient(135deg, #fff1f2 0%, #fecdd3 100%);
+    border: 1px solid rgba(251, 113, 133, 0.2);
+    
+    .calendar-title {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        position: relative;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: $rosa;
+            border-radius: 3px;
+        }
+    }
+    
+    .calendar-nav-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        &:active {
+            transform: scale(0.95);
+        }
+        
+        &:focus {
+            outline: none;
+            ring: 2px;
+            ring-opacity: 50%;
+            ring-color: $rosa;
+        }
     }
 }

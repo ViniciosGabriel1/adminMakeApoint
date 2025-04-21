@@ -38,6 +38,33 @@ class Calendar extends Component
                 'status' => 'confirmed'
             ],
             [
+                'id' => 1,
+                'date' => Carbon::now()->format('Y-m-d'),
+                'time' => '09:00',
+                'title' => 'Maquiagem Social',
+                'description' => 'Cliente: Ana Silva - Duração: 1h30',
+                'type' => 'social',
+                'status' => 'confirmed'
+            ],
+            [
+                'id' => 1,
+                'date' => Carbon::now()->format('Y-m-d'),
+                'time' => '09:00',
+                'title' => 'Maquiagem Social',
+                'description' => 'Cliente: Ana Silva - Duração: 1h30',
+                'type' => 'social',
+                'status' => 'confirmed'
+            ],
+            [
+                'id' => 1,
+                'date' => Carbon::now()->format('Y-m-d'),
+                'time' => '09:00',
+                'title' => 'Maquiagem Social',
+                'description' => 'Cliente: Ana Silva - Duração: 1h30',
+                'type' => 'social',
+                'status' => 'confirmed'
+            ],
+            [
                 'id' => 2,
                 'date' => Carbon::now()->format('Y-m-d'),
                 'time' => '14:00',
