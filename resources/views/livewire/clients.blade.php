@@ -11,7 +11,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">
-                            <li class="breadcrumb-item"><a href="{{url('/')}}">Página Inicial</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}">Página Inicial</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Formulário de clientes</li>
                         </ol>
                     </div>
@@ -65,23 +65,18 @@
                                 </div>
                             </div>
                             <!--end::Body-->
-
                             <!--begin::Footer-->
                             <div class="card-footer">
                                 {{-- <button type="submit" class="btn btn-warning">Salvar</button> --}}
-                                <button type="submit" class="btn btn-warning">
+                                <button type="submit" class="btn btn-outline-primary">
                                     {{ $editMode ? 'Atualizar' : 'Criar' }}
                                 </button>
+                                @if ($editMode)
+                                    <button type="button" wire:click="resetForm" class="btn btn-outline-rosa">Cancelar</button>
+                                @endif
                             </div>
-
-                            @if ($editMode)
-                                <button type="button" wire:click="resetForm"
-                                    class="text-gray-500 underline">Cancelar</button>
-                            @endif
                             <!--end::Footer-->
                         </form>
-
-
                         <!--end::Form-->
                     </div>
                 </div>
@@ -178,7 +173,7 @@
                                                 resultados
                                             </p>
                                         </div>
-                            
+
                                         <nav>
                                             <ul class="pagination mb-0">
                                                 {{-- Anterior --}}
@@ -188,10 +183,11 @@
                                                     </li>
                                                 @else
                                                     <li class="page-item">
-                                                        <button wire:click="previousPage" class="page-link">Anterior</button>
+                                                        <button wire:click="previousPage"
+                                                            class="page-link">Anterior</button>
                                                     </li>
                                                 @endif
-                            
+
                                                 {{-- Páginas --}}
                                                 @foreach ($clients->getUrlRange(1, $clients->lastPage()) as $page => $url)
                                                     @if ($page == $clients->currentPage())
@@ -200,13 +196,14 @@
                                                         </li>
                                                     @else
                                                         <li class="page-item">
-                                                            <button wire:click="gotoPage({{ $page }})" class="page-link">
+                                                            <button wire:click="gotoPage({{ $page }})"
+                                                                class="page-link">
                                                                 {{ $page }}
                                                             </button>
                                                         </li>
                                                     @endif
                                                 @endforeach
-                            
+
                                                 {{-- Próximo --}}
                                                 @if ($clients->hasMorePages())
                                                     <li class="page-item">
@@ -222,7 +219,7 @@
                                     </div>
                                 @endif
                             </div>
-                            
+
 
 
 

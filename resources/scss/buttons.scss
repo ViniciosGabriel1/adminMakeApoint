@@ -1,0 +1,55 @@
+/* ==================== */
+/* VARIÁVEIS E MIXINS */
+/* ==================== */
+$rosa: #fb7185;
+$rosa-claro: #fecdd3;
+$rosa-escuro: #9f1239;
+$rosa-50: #fff1f2;
+$rosa-600: #e11d48;
+$rosa-800: #9f1239;
+
+
+
+.btn-outline-rosa {
+    background-color: transparent;
+    border: 1px solid $rosa;
+    color: $rosa;
+
+    &:hover {
+        background-color: $rosa;
+        color: #fff;
+    }
+
+    &:focus,
+    &:active {
+        background-color: $rosa-800;
+        color: #fff;
+    }
+}
+
+.btn-rosa {
+    background-color: $rosa;
+    color: #fff;
+    border: none;
+
+    &:hover {
+        background-color: $rosa-600;
+        color: #fff;
+    }
+
+    &:focus,
+    &:active {
+        background-color: $rosa-800;
+        color: #fff;
+    }
+}
+
+.btn-rosa-light {
+    background-color: $rosa-claro;
+    color: $rosa-800;
+
+    &:hover {
+        background-color: $rosa;
+        color: #fff;
+    }
+}
