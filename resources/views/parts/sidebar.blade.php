@@ -67,6 +67,12 @@
                         <p>Clientes</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('services') }}" class="nav-link {{ request()->is('services') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-brush"></i>
+                        <p>Serviços</p>
+                    </a>
+                </li>
                 
                 <li class="nav-item">
                     <a href="#" class="nav-link {{ request()->is('clients') ? 'active' : '' }}">

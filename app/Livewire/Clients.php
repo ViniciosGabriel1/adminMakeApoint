@@ -33,6 +33,7 @@ class Clients extends Component
         ModelsClients::updateOrCreate(
             ['id' => $this->clientId], // esse campo deve ser setado no modo de edição
             [
+                'user_id' => auth()->id(),
                 'name'  => $this->name,
                 'email' => $this->email,
                 'phone' => $this->phone,
@@ -77,7 +78,7 @@ class Clients extends Component
         $this->editMode = true;
     }
 
-    protected $listeners = ['deleteClient' => 'delete'];
+    protected $listeners = ['delete'];
     public function delete($id)
     {
         ModelsClients::findOrFail($id)->delete();
@@ -98,6 +99,7 @@ class Clients extends Component
     public function render()
     {
         $clients = ModelsClients::where('name', 'like', '%' . $this->search . '%')
+            ->where('user_id',auth()->id())
             ->orderBy('name')
             ->paginate(3)
             ->withQueryString(); // <-- Isso mantém a URL base
