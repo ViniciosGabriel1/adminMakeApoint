@@ -59,7 +59,7 @@ window.addEventListener("alert", (event) => {
 });
 
 window.addEventListener("confirm", (event) => {
-    const ClientId = event.detail.ClientId;
+    const id_registro = event.detail.id;
 
     // Swal.fire({
     //     title: "Tem certeza?",
@@ -93,7 +93,7 @@ window.addEventListener("confirm", (event) => {
       }
   }).then((result) => {
       if (result.isConfirmed) {
-          Livewire.dispatch("delete", { id: ClientId });
+          Livewire.dispatch("delete", { id: id_registro });
       }
   });
   
