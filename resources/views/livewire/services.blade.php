@@ -120,7 +120,7 @@
                                             <tr>
                                                 <td>{{ $service->title }}</td>
                                                 <td>{{ $service->description }}</td>
-                                                <td>{{ $service->price }}</td>
+                                                <td>{{ $service->value}}</td>
                                                 <td>
                                                     <button wire:click="edit({{ $service->id }})" class="btn btn-sm btn-primary">Editar</button>
                                                     <button wire:click="confirmDelete({{ $service->id }})" class="btn btn-sm btn-danger">Excluir</button>

@@ -1,4 +1,5 @@
 @extends('layouts.auth')
+@section('title', 'Faça seu Cadastro!')
 
 @section('body-class', 'register-page')
 

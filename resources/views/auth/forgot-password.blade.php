@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+@section('title', 'Esqueci a senha')
+
 @section('body-class', 'login-page')
 
 @section('content')
