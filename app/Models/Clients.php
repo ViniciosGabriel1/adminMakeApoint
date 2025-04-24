@@ -14,4 +14,10 @@ class Clients extends Model
         'email',
         'phone'
     ];
+
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedules::class);
+    }
 }

@@ -62,7 +62,7 @@ class Clients extends Component
 
     public function confirmDelete($id) {
 
-        $this->dispatch('confirm', ClientId: $id);
+        $this->dispatch('confirm', id: $id);
     }
 
 
