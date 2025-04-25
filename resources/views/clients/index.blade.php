@@ -239,7 +239,8 @@
         </div>
         <!--end::App Content-->
     </main> --}}
-        @livewire('clients')
+        {{-- @livewire('clients') --}}
+        <livewire:clients lazy/>
 
 
 @endsection

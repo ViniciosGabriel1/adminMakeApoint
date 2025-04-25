@@ -68,8 +68,7 @@
           
         <!--end::Col-->
     {{-- @livewire('counter') --}}
-    @livewire('calendar')
-
+    <livewire:calendar lazy/>
     
     </div>
 

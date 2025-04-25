@@ -20,12 +20,6 @@ class Schedules extends Component
     public $agendamentoId;
     public $editMode = false;
 
-    // protected $rules = [
-    //     'client_id' => 'required|exists:clients,id',
-    //     'data' => 'required|date',
-    //     'hora' => 'required',
-    //     'servicosSelecionados' => 'required|array|min:1',
-    // ];
 
     protected $rules = [
         'client_id' => 'required|exists:clients,id',

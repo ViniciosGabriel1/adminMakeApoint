@@ -2,5 +2,6 @@
 @section('title', 'Agenda já.')
 
 @section('content')
-    @livewire('schedules')
+    {{-- @livewire('schedules' lazy) --}}
+    <livewire:schedules lazy>
 @endsection

@@ -28,6 +28,9 @@ class Clients extends Component
 
     public function save()
     {
+
+
+        sleep(3);
         $this->validate();
 
         ModelsClients::updateOrCreate(
@@ -96,6 +99,11 @@ class Clients extends Component
         $this->resetPage();
     }
 
+    public function placeholder()
+    {
+        return view('livewire.placeholders.loading');
+    }
+
     public function render()
     {
         $clients = ModelsClients::where('name', 'like', '%' . $this->search . '%')
@@ -105,8 +113,9 @@ class Clients extends Component
             ->withQueryString(); // <-- Isso mantém a URL base
         // dd($clients);
 
+        // sleep(5);
         return view('livewire.clients', [
             'clients' => $clients
-        ]);
+        ])->layout('layouts.default');
     }
 }
