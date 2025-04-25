@@ -4,10 +4,10 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="./index.html" class="brand-link">
+        <a href="{{url('/')}}" class="brand-link">
 
             <img class="brand-image opacity-75 shadow"
-                src="{{ Vite::asset('resources/images/AdminLTELogo.png') }}">
+                src="{{ Vite::asset('resources/images/favzada.jpg') }}">
 
 
             <!--end::Brand Image-->

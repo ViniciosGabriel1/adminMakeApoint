@@ -18,6 +18,11 @@
     @vite('resources/scss/app.scss')
 
     <link rel="stylesheet" href="../../dist/css/adminlte.css" />
+    <!-- Para favicon .ico -->
+<link rel="icon" href="{{ Vite::asset('resources/images/favzada.jpg') }}" type="image/x-icon">
+
+<!-- Ou para favicon .png -->
+{{-- <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png"> --}}
 
 </head>
 <!--end::Head-->

@@ -120,7 +120,8 @@ class Schedules extends Component
         $this->agendamentoId = $agendamento->id;
         $this->client_id = $agendamento->client_id;
         $this->data = $agendamento->data;
-        $this->hora = $agendamento->hora;
+        $this->hora = \Carbon\Carbon::parse($agendamento->hora)->format('H:i');
+        
         $this->observacoes = $agendamento->observacoes;
         $this->servicosSelecionados = $agendamento->servicos->pluck('id')->toArray();
         $this->valores = $agendamento->servicos->pluck('value')->toArray();
