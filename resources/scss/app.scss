@@ -85,44 +85,44 @@
 
 .text-white    { color: #fff !important; }
 
-/* Definindo o estilo para o container do placeholder */
-.loading-placeholder {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f8f9fa; /* Fundo suave */
-    text-align: center;
-}
+// /* Definindo o estilo para o container do placeholder */
+// .loading-placeholder {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     height: 100vh;
+//     background-color: #f8f9fa; /* Fundo suave */
+//     text-align: center;
+// }
 
-.spinner-border {
-    width: 4rem;  // Tamanho maior para maior destaque
-    height: 4rem;
-    border-width: 0.3em;  // Largura da borda para uma aparência mais robusta
-    border-radius: 50%;  // Garantindo que o spinner seja circular
-    border-top-color: $rosa-600;  // Usando uma cor mais intensa para a borda superior
-    border-right-color: $rosa-claro;  // Cor mais suave para a borda direita
-    border-bottom-color: $rosa-escuro;  // Cor mais forte para a borda inferior
-    border-left-color: $rosa-50;  // Cor mais clara para a borda esquerda
+// .spinner-border {
+//     width: 4rem;  // Tamanho maior para maior destaque
+//     height: 4rem;
+//     border-width: 0.3em;  // Largura da borda para uma aparência mais robusta
+//     border-radius: 50%;  // Garantindo que o spinner seja circular
+//     border-top-color: $rosa-600;  // Usando uma cor mais intensa para a borda superior
+//     border-right-color: $rosa-claro;  // Cor mais suave para a borda direita
+//     border-bottom-color: $rosa-escuro;  // Cor mais forte para a borda inferior
+//     border-left-color: $rosa-50;  // Cor mais clara para a borda esquerda
 
-    animation: spinner 1.2s linear infinite;  // A animação continua suave
+//     animation: spinner 1.2s linear infinite;  // A animação continua suave
 
-    // Definindo a animação do spinner
-    @keyframes spinner {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-}
+//     // Definindo a animação do spinner
+//     @keyframes spinner {
+//         0% {
+//             transform: rotate(0deg);
+//         }
+//         100% {
+//             transform: rotate(360deg);
+//         }
+//     }
+// }
 
-.loading-text {
-    margin-top: 1rem;
-    color: $rosa-600;  // Usando uma cor vibrante para o texto
-    font-size: 1.2rem;
-    text-align: center;
-    font-weight: bold;
-}
+// .loading-text {
+//     margin-top: 1rem;
+//     color: $rosa-600;  // Usando uma cor vibrante para o texto
+//     font-size: 1.2rem;
+//     text-align: center;
+//     font-weight: bold;
+// }

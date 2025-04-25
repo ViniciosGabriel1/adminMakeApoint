@@ -35,41 +35,50 @@
                                 {{ $editMode ? 'Editar Agendamento' : 'Novo Agendamento' }}
                             </h5>
                         </div>
-                    
+
                         <form wire:submit.prevent="salvar">
                             <div class="card-body">
 
-                                   {{-- Seleção de cliente --}}
-                        <div class="mb-4">
-                            <label class="form-label">Cliente</label>
-                            <select wire:model="client_id" class="form-select">
-                                <option value="">Selecione um cliente</option>
-                                @foreach ($clientes as $cliente)
-                                    <option value="{{ $cliente->id }}">{{ $cliente->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('client_id') <small class="text-danger">{{ $message }}</small> @enderror
-                        </div>
+                                {{-- Seleção de cliente --}}
+                                <div class="mb-4">
+                                    <label class="form-label">Cliente</label>
+                                    <select wire:model="client_id" class="form-select">
+                                        <option value="">Selecione um cliente</option>
+                                        @foreach ($clientes as $cliente)
+                                            <option value="{{ $cliente->id }}">{{ $cliente->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('client_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                                 {{-- ...campos omitidos pra foco no estilo... --}}
                                 <div class="row mb-4">
                                     <div class="col-md-3">
                                         <label class="form-label">Data:</label>
                                         <input type="date" class="form-control" wire:model="data">
-                                        @error('data') <span class="text-danger">{{ $message }}</span> @enderror
+                                        @error('data')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                
+
                                     <div class="col-md-3">
                                         <label class="form-label">Hora:</label>
                                         <input type="time" class="form-control" wire:model="hora">
-                                        @error('hora') <span class="text-danger">{{ $message }}</span> @enderror
+                                        @error('hora')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
-                                
+
                                 {{-- Observações --}}
                                 <div class="mb-4">
                                     <label class="form-label">Observações:</label>
-                                    <textarea class="form-control" rows="3" wire:model="observacoes" placeholder="Digite qualquer observação relevante..."></textarea>
-                                    @error('observacoes') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <textarea class="form-control" rows="3" wire:model="observacoes"
+                                        placeholder="Digite qualquer observação relevante..."></textarea>
+                                    @error('observacoes')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 {{-- Serviços dinâmicos --}}
                                 <div class="mb-4">
@@ -77,54 +86,44 @@
                                     @foreach ($servicosSelecionados as $index => $servicoId)
                                         <div class="d-flex align-items-center gap-3 mb-2">
                                             <select wire:model="servicosSelecionados.{{ $index }}"
-                                                    wire:change="atualizarValor({{ $index }})"
-                                                    class="form-select w-50">
+                                                wire:change="atualizarValor({{ $index }})"
+                                                class="form-select w-50">
                                                 <option value="">Selecione um serviço</option>
                                                 @foreach ($servicos as $servico)
                                                     <option value="{{ $servico->id }}">
-                                                        {{ $servico->title }} - R$ {{ number_format($servico->value, 2, ',', '.') }}
+                                                        {{ $servico->title }} - R$
+                                                        {{ number_format($servico->value, 2, ',', '.') }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                    
+
                                             <span class="fw-bold text-rosa-800">
                                                 R$ {{ number_format($valores[$index] ?? 0, 2, ',', '.') }}
                                             </span>
-                    
+
                                             <button wire:click.prevent="removerServico({{ $index }})"
-                                                    class="btn btn-sm btn-danger">
+                                                class="btn btn-sm btn-danger">
                                                 Remover
                                             </button>
                                         </div>
                                     @endforeach
-                    
-                                    <button wire:click.prevent="adicionarServico"
-                                            class="btn btn-outline-rosa mt-2">
+
+                                    <button wire:click.prevent="adicionarServico" class="btn btn-outline-rosa mt-2">
                                         + Adicionar Serviço
                                     </button>
                                 </div>
-                    
+
                                 {{-- Total --}}
                                 <div class="bg-rosa-800 text-white p-3 rounded mb-4">
                                     <strong>TOTAL:</strong> R$ {{ number_format($total, 2, ',', '.') }}
                                 </div>
-                    
-                                {{-- Ações --}}
-                                <div class="d-flex flex-wrap gap-2">
-                                    <button type="submit" class="btn btn-outline-rosa">
-                                        {{ $editMode ? 'Atualizar' : 'Criar' }}
-                                    </button>
-                    
-                                    @if ($editMode)
-                                        <button type="button" wire:click="resetForm" class="btn btn-outline-secondary">
-                                            Cancelar
-                                        </button>
-                                    @endif
-                                </div>
+
+                                <x-form-buttons :edit-mode="$editMode" cancel-action="resetForm" />
+
                             </div>
                         </form>
                     </div>
-                    
+
                 </div>
 
                 <div class="row">
@@ -155,9 +154,10 @@
                                     <thead>
                                         <tr>
                                             {{-- <th>ID</th> --}}
-                                            <th>data</th>
-                                            <th>hora</th>
-                                            <th>descrição</th>
+                                            <th>Data</th>
+                                            <th>Hora</th>
+                                            <th>Descrição</th>
+                                            <th>Valor Total</th>
                                             <th>Ações</th>
                                         </tr>
                                     </thead>
@@ -168,6 +168,7 @@
                                                 <td>{{ $schedule->data }}</td>
                                                 <td>{{ $schedule->hora }}</td>
                                                 <td>{{ $schedule->observacoes }}</td>
+                                                <td>{{ number_format($schedule->valor_total, 2, '.', ',') }}</td>
                                                 <td>
                                                     <button wire:click="edit({{ $schedule->id }})"
                                                         class="btn btn-sm btn-primary">Editar</button>
@@ -232,7 +233,8 @@
                                                 {{-- Próximo --}}
                                                 @if ($schedules->hasMorePages())
                                                     <li class="page-item">
-                                                        <button wire:click="nextPage" class="page-link">Próximo</button>
+                                                        <button wire:click="nextPage"
+                                                            class="page-link">Próximo</button>
                                                     </li>
                                                 @else
                                                     <li class="page-item disabled">
@@ -253,9 +255,9 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
         <!--end::App Content-->
     </main>
-   
+
 </div>

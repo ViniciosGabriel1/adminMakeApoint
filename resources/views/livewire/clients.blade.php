@@ -64,17 +64,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--end::Body-->
-                            <!--begin::Footer-->
-                            <div class="card-footer">
-                                {{-- <button type="submit" class="btn btn-warning">Salvar</button> --}}
-                                <button type="submit" class="btn btn-outline-primary">
-                                    {{ $editMode ? 'Atualizar' : 'Criar' }}
-                                </button>
-                                @if ($editMode)
-                                    <button type="button" wire:click="resetForm" class="btn btn-outline-rosa">Cancelar</button>
-                                @endif
-                            </div>
+
+
+                            <x-form-buttons :edit-mode="$editMode" cancel-action="resetForm" />
                             <!--end::Footer-->
                         </form>
                         <!--end::Form-->
