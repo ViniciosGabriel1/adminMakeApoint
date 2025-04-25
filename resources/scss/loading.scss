@@ -16,12 +16,13 @@
     border-width: 0.3em; 
     border-radius: 50%;  
     border-top-color: $rosa-600; 
-    border-right-color: $rosa-claro;  
-    border-bottom-color: $rosa-escuro; 
-    border-left-color: $rosa-50;  
+    border-right-color: $rosa-claro;  // Cor mais suave para a borda direita
+    border-bottom-color: $rosa-escuro;  // Cor mais forte para a borda inferior
+    border-left-color: $rosa-50;  // Cor mais clara para a borda esquerda
 
-    animation: spinner 1.2s linear infinite; 
+    animation: spinner 1.2s linear infinite;  // A animação continua suave
 
+    // Definindo a animação do spinner
     @keyframes spinner {
         0% {
             transform: rotate(0deg);
@@ -38,4 +39,9 @@
     font-size: 1.2rem;
     text-align: center;
     font-weight: bold;
+}
+.spinner-xs {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-width: 0.12em;
 }

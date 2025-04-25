@@ -69,14 +69,17 @@
                             <!--end::Body-->
 
                             <!--begin::Footer-->
-                            <div class="card-footer">
+                            {{-- <div class="card-footer">
                                 <button type="submit" class="btn btn-outline-primary">
                                     {{ $editMode ? 'Atualizar' : 'Cadastrar' }}
                                 </button>
                                 @if ($editMode)
                                     <button type="button" wire:click="resetForm" class="btn btn-outline-danger">Cancelar</button>
                                 @endif
-                            </div>
+                            </div> --}}
+
+                            <x-form-buttons :edit-mode="$editMode" cancel-action="resetForm" />
+
                             <!--end::Footer-->
                         </form>
                         <!--end::Form-->

@@ -28,9 +28,6 @@ class Clients extends Component
 
     public function save()
     {
-
-
-        sleep(3);
         $this->validate();
 
         ModelsClients::updateOrCreate(
