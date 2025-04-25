@@ -17,6 +17,8 @@ Route::middleware(['auth'])->group(function () {
     // });
 
     Route::get('/clientes', [ClientsController::class, 'index'])->name('clients');
+    // Route::get('/clientes', \App\Livewire\Clients::class)->name('clients')->lazy();
+
     Route::get('/servicos', [ServicesController::class, 'index'])->name('services');
     Route::get('/agendamentos', [ScheduleController::class, 'index'])->name('schedules');
 });

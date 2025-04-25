@@ -1,0 +1,41 @@
+
+/* Definindo o estilo para o container do placeholder */
+.loading-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa; /* Fundo suave */
+    text-align: center;
+}
+
+.spinner-border {
+    width: 4rem;  
+    height: 4rem;
+    border-width: 0.3em; 
+    border-radius: 50%;  
+    border-top-color: $rosa-600; 
+    border-right-color: $rosa-claro;  
+    border-bottom-color: $rosa-escuro; 
+    border-left-color: $rosa-50;  
+
+    animation: spinner 1.2s linear infinite; 
+
+    @keyframes spinner {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+.loading-text {
+    margin-top: 1rem;
+    color: $rosa-600;  // Usando uma cor vibrante para o texto
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: bold;
+}
