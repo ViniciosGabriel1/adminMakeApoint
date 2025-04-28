@@ -10,7 +10,6 @@
             {{ $currentDate->format('F Y') }}
         </h2>
 
-        <button  class="btn-rosa" wire:click='msg'>AQUI</button>
         
         <button wire:click="nextMonth" 
                 class="calendar-nav-button flex items-center justify-center w-10 h-10 rounded-full bg-white text-rosa hover:bg-rosa hover:text-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
@@ -66,6 +65,11 @@
                                     <h4 class="font-bold text-lg text-rosa-700">
                                         {{ $event['name_client'] }}
                                     </h4>
+
+                                    {{-- <button class="btn-rosa" wire:click="msg('{{ $event[0] }}')">Enviar lembrete</button> --}}
+
+
+
                                     <div class="flex items-center text-sm text-gray-600">
                                         <i class="bi bi-clock-fill text-rosa-600 mr-1"></i>
                                         <span class="text-gray-800">
@@ -94,9 +98,11 @@
                                 </p>
                             </div>
                     
-                            <span class="bg-rosa text-white px-3 py-1 rounded-full text-sm self-start ml-4 whitespace-nowrap">
+                            {{-- <span class="bg-rosa text-white px-3 py-1 rounded-full text-sm self-start ml-4 whitespace-nowrap">
                                 {{ $event['type'] ?? 'Geral' }}
-                            </span>
+                            </span> --}}
+                            <button class=" rounded btn-outline-rosa" wire:click="msg('{{ json_encode($event) }}')">Enviar lembrete</button>
+
                         </div>
                     </div>
                     
