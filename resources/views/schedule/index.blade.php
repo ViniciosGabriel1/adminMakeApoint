@@ -4,4 +4,5 @@
 @section('content')
     {{-- @livewire('schedules' lazy) --}}
     <livewire:schedules lazy>
+    
 @endsection
