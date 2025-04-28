@@ -153,7 +153,6 @@
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
-                                            {{-- <th>ID</th> --}}
                                             <th>Data</th>
                                             <th>Hora</th>
                                             <th>Descrição</th>
@@ -167,8 +166,9 @@
                                                 {{-- <td>{{ $schedule->id }}</td> --}}
                                                 <td>{{ $schedule->data }}</td>
                                                 <td>{{ $schedule->hora }}</td>
-                                                <td>{{ $schedule->observacoes }}</td>
-                                                <td>{{ number_format($schedule->valor_total, 2, '.', ',') }}</td>
+                                                <td title="{{ $schedule->observacoes }}">
+                                                    {{ Str::limit($schedule->observacoes, 50, '...') }}
+                                                </td>                                                <td>{{ number_format($schedule->valor_total, 2, '.', ',') }}</td>
                                                 <td>
                                                     <button wire:click="edit({{ $schedule->id }})"
                                                         class="btn btn-sm btn-primary">Editar</button>

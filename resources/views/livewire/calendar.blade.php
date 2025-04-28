@@ -9,6 +9,8 @@
         <h2 class="calendar-title text-2xl font-bold text-rosa-800 tracking-wide">
             {{ $currentDate->format('F Y') }}
         </h2>
+
+        <button  class="btn-rosa" wire:click='msg'>AQUI</button>
         
         <button wire:click="nextMonth" 
                 class="calendar-nav-button flex items-center justify-center w-10 h-10 rounded-full bg-white text-rosa hover:bg-rosa hover:text-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
@@ -26,13 +28,13 @@
     <!-- Dias do mês com células maiores -->
     <div class="calendar-days grid grid-cols-7 gap-2">
         @foreach($days as $day)
-            <div wire:click="selectDate('{{ $day['date']->format('Y-m-d') }}')"
+            <div wire:click="selectDate('{{ $day['data']->format('Y-m-d') }}')"
                  class="calendar-day {{ $day['isCurrentMonth'] ? 'current-month' : 'other-month' }} 
                         {{ $day['isToday'] ? 'today' : '' }}
-                        {{ $day['date']->format('Y-m-d') === $selectedDate ? 'selected-day' : '' }}
+                        {{ $day['data']->format('Y-m-d') === $selectedDate ? 'selected-day' : '' }}
                         h-32 p-2 relative rounded-lg transition-all duration-200 hover:shadow-md">
                 
-                <div class="day-number text-lg font-medium">{{ $day['date']->day }}</div>
+                <div class="day-number text-lg font-medium">{{ $day['data']->day }}</div>
                 
                 @if(count($day['events']) > 0)
                     <div class="event-indicator absolute top-2 right-2 bg-rosa text-white rounded-full w-6 h-6 flex items-center justify-center" 
@@ -56,25 +58,50 @@
                 
                 <div class="modal-body p-4">
                     @if(count($this->getSelectedDateEvents()) > 0)
-                        @foreach($this->getSelectedDateEvents() as $event)
-                            <div class="event-item bg-rosa-50 border-l-4 border-rosa p-4 rounded-lg mb-3">
-                                <div class="flex justify-between items-start">
-                                    <div class="flex-1">
-                                        <h4 class="font-bold text-lg text-rosa-800">{{ $event['title'] }}</h4>
-                                        <p class="text-gray-600 mt-1 text-sm">{{ $event['description'] }}</p>
-                                        <div class="mt-2 flex items-center text-sm">
-                                            {{-- <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-rosa-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg> --}}
-                                            <span class="text-rosa-600">{{ $event['time'] ?? 'Horário não definido' }}</span>
-                                        </div>
+                    @foreach($this->getSelectedDateEvents() as $event)
+                    <div class="event-item bg-rosa-50 border-l-4 border-rosa p-4 rounded-lg mb-3">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="font-bold text-lg text-rosa-700">
+                                        {{ $event['name_client'] }}
+                                    </h4>
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <i class="bi bi-clock-fill text-rosa-600 mr-1"></i>
+                                        <span class="text-gray-800">
+                                            {{ $event['hora'] ?? 'Horário não definido' }}
+                                        </span>
                                     </div>
-                                    <span class="bg-rosa text-white px-3 py-1 rounded-full text-sm">
-                                        {{ $event['type'] ?? 'Geral' }}
-                                    </span>
                                 </div>
+                    
+                                <p class="text-sm text-gray-700 mt-2">
+                                    <span class="font-semibold text-rosa-800">Serviço:</span>
+                                    <span class="text-gray-800">{{ $event['service'] }}</span>
+                                </p>
+                    
+                                <p class="text-sm text-gray-700 mt-1">
+                                    <span class="font-semibold text-rosa-800">Observações:</span>
+                                    <span class="text-gray-800">
+                                        {{ $event['observacoes'] ?? 'Nenhuma' }}
+                                    </span>
+                                </p>
+                    
+                                <p class="text-sm text-gray-700 mt-1">
+                                    <span class="font-semibold text-rosa-800">Valor:</span>
+                                    <span class="text-gray-800">
+                                        R$ {{ number_format($event['valor_total'], 2, ',', '.') }}
+                                    </span>
+                                </p>
                             </div>
-                        @endforeach
+                    
+                            <span class="bg-rosa text-white px-3 py-1 rounded-full text-sm self-start ml-4 whitespace-nowrap">
+                                {{ $event['type'] ?? 'Geral' }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                @endforeach
+                
                     @else
                         <div class="text-center py-8 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
