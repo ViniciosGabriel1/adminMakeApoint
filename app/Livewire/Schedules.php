@@ -152,10 +152,10 @@ class Schedules extends Component
 
     public function render()
     {
-        $show = ModelSchedules::with('cliente')->paginate(10);
-    //    dd($show[0]->data); 
+        $schedules = ModelSchedules::with('cliente')->paginate(10);
+    //    dd($schedules[0]->data); 
 
-    foreach ($show as $schedule) {
+    foreach ($schedules as $schedule) {
         $schedule->data = \Carbon\Carbon::parse($schedule->data)->format('d/m/Y');
     }
     
@@ -163,7 +163,7 @@ class Schedules extends Component
         return view('livewire.schedules', [
             'clientes' => ModelClients::where('user_id',auth()->id())->get(),
             'servicos' => ModelServices::where('user_id',auth()->id())->get(),
-            'schedules' => $show
+            'schedules' => $schedules
         ]);
     }
 }
