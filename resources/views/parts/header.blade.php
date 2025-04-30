@@ -140,45 +140,38 @@
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                     <img class="user-image rounded-circle shadow"
-                        src="{{ Vite::asset('resources/images/user2-160x160.jpg') }}">
-
-
-                    <span class="d-none d-md-inline">{{auth()->user()->name}}</span>
+                         src="{{ Vite::asset('resources/images/user2-160x160.jpg') }}">
+                    <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+            
+                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end shadow">
                     <!--begin::User Image-->
-                    <li class="user-header text-bg-primary">
-                        <img src="../../dist/assets/img/user2-160x160.jpg" class="rounded-circle shadow"
-                            alt="User Image" />
-                        <p>
-                            {{auth()->user()->name}} - Web Developer
-                            <small>Member since Nov. 2023</small>
+                    <li class="user-header bg-rosa text-white text-center p-3">
+                        <img src="{{ Vite::asset('resources/images/user2-160x160.jpg') }}"
+                             class="rounded-circle shadow mb-2"
+                             alt="User Image"
+                             style="width: 80px; height: 80px; object-fit: cover;">
+                        <p class="mb-0">
+                            {{ auth()->user()->name }} - Web Developer
+                            <small class="d-block text-light mt-1">Membro desde Nov. 2023</small>
                         </p>
                     </li>
                     <!--end::User Image-->
-                    <!--begin::Menu Body-->
-                    <li class="user-body">
-                        <!--begin::Row-->
-                        <div class="row">
-                            <div class="col-4 text-center"><a href="#">Followers</a></div>
-                            <div class="col-4 text-center"><a href="#">Sales</a></div>
-                            <div class="col-4 text-center"><a href="#">Friends</a></div>
-                        </div>
-                        <!--end::Row-->
-                    </li>
-                    <!--end::Menu Body-->
+            
+                  
+            
                     <!--begin::Menu Footer-->
-                    <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                        <form action="{{route('logout')}}" method="post">
+                    <li class="user-footer bg-rosa-light d-flex justify-content-between align-items-center p-3">
+                        <a href="#" class="btn bg-rosa-600 text-white btn-sm rounded">Profile</a>
+                        <form action="{{ route('logout') }}" method="post" class="m-0">
                             @csrf
-                            <button  class="btn btn-default btn-flat float-end" type="submit">Logout</button>
+                            <button type="submit" class="btn bg-rosa-800 text-white btn-sm rounded">Logout</button>
                         </form>
-                        {{-- <a href="#" class="btn btn-default btn-flat float-end">Sign out</a> --}}
                     </li>
                     <!--end::Menu Footer-->
                 </ul>
             </li>
+            
             <!--end::User Menu Dropdown-->
         </ul>
         <!--end::End Navbar Links-->
