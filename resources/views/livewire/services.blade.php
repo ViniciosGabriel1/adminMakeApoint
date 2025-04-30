@@ -29,11 +29,13 @@
                 <!--begin::Row-->
                 <div class="row g-4">
                     <!--begin::Col-->
-                    <div class="card card-warning card-outline mb-4">
+                    <div class="card card-custom card-outline mb-4">
                         <!--begin::Header-->
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <div class="card-title">Formulário de Cadastro</div>
-                        </div>
+                        </div> --}}
+                        <x-form-titles :edit-mode="$editMode" label="Serviço"/>
+
                         <!--end::Header-->
                         
                         <!--begin::Form-->

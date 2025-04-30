@@ -28,11 +28,11 @@
                 <!--begin::Row-->
                 <div class="row g-4">
                     <!--begin::Col-->
-                    <div class="card card-warning card-outline mb-4">
+                    <div class="card card-custom card-outline mb-4">
                         <!--begin::Header-->
-                        <div class="card-header">
-                            <div class="card-title">Horizontal Form</div>
-                        </div>
+                        <x-form-titles :edit-mode="$editMode" label="Cliente"/>
+                        
+
                         <!--end::Header-->
                         <!--begin::Form-->
                         <form wire:submit.prevent="save">

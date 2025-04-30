@@ -29,13 +29,15 @@
         <div class="app-content">
             <div class="container-fluid">
                 <div class="row g-4">
-                    <div class="card border-rosa shadow-sm mb-4">
-                        <div class="card-header bg-rosa text-white">
+                    <div class="card-custom border-rosa shadow-sm">
+                        {{-- <div class="card-header bg-rosa text-white m-5">
                             <h5 class="card-title mb-0">
                                 {{ $editMode ? 'Editar Agendamento' : 'Novo Agendamento' }}
                             </h5>
-                        </div>
+                        </div> --}}
 
+                        <x-form-titles :edit-mode="$editMode" label="Agendamento"/>
+                        
                         <form wire:submit.prevent="salvar">
                             <div class="card-body">
 
@@ -118,7 +120,10 @@
                                     <strong>TOTAL:</strong> R$ {{ number_format($total, 2, ',', '.') }}
                                 </div>
 
-                                <x-form-buttons :edit-mode="$editMode" cancel-action="resetForm" />
+                                <div class="mb-2">
+
+                                    <x-form-buttons :edit-mode="$editMode" cancel-action="resetForm" />
+                                </div>
 
                             </div>
                         </form>
@@ -126,7 +131,7 @@
 
                 </div>
 
-                <div class="row">
+                <div class="row mt-5">
                     <div class="col-12">
                         <div class="card">
 
@@ -168,7 +173,8 @@
                                                 <td>{{ $schedule->hora }}</td>
                                                 <td title="{{ $schedule->observacoes }}">
                                                     {{ Str::limit($schedule->observacoes, 50, '...') }}
-                                                </td>                                                <td>{{ number_format($schedule->valor_total, 2, '.', ',') }}</td>
+                                                </td>
+                                                <td>{{ number_format($schedule->valor_total, 2, '.', ',') }}</td>
                                                 <td>
                                                     <button wire:click="edit({{ $schedule->id }})"
                                                         class="btn btn-sm btn-primary">Editar</button>
