@@ -7,7 +7,7 @@
         <a href="{{url('/')}}" class="brand-link">
 
             <img class="brand-image opacity-75 shadow"
-                src="{{ Vite::asset('resources/images/favzada.jpg') }}">
+                src="{{ Vite::asset('resources/images/favzada.png') }}">
 
 
             <!--end::Brand Image-->

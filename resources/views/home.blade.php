@@ -1,10 +1,10 @@
 @extends('layouts.default')
-@section('page-title', 'DashZada')
+@section('title', 'Página principal')
 
 @section('content')
     <div class="row">
         <!--begin::Col-->
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-3 col-6">
               <div class="small-box bg-rosa text-white p-3 rounded">
                 <div class="d-flex justify-content-between align-items-center">
@@ -64,7 +64,9 @@
                 </a>
               </div>
             </div>
-          </div>
+          </div> --}}
+
+          <livewire:homebox lazy/>
           
         <!--end::Col-->
     {{-- @livewire('counter') --}}
