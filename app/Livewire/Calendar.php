@@ -174,13 +174,14 @@ class Calendar extends Component
 
         // dd($this->events);
     }
-
     public function generateCalendar()
     {
+        Carbon::setLocale('pt_BR');
+    
         $this->days = [];
         $startOfMonth = $this->currentDate->copy()->startOfMonth();
         $endOfMonth = $this->currentDate->copy()->endOfMonth();
-
+    
         // Dias do mês anterior
         $startOfWeek = $startOfMonth->copy()->startOfWeek(Carbon::SUNDAY);
         if ($startOfWeek->lt($startOfMonth)) {
@@ -189,14 +190,14 @@ class Calendar extends Component
                 $startOfWeek->addDay();
             }
         }
-
+    
         // Dias do mês atual
         $currentDay = $startOfMonth->copy();
         while ($currentDay->lte($endOfMonth)) {
             $this->addDayToCalendar($currentDay, true);
             $currentDay->addDay();
         }
-
+    
         // Dias do próximo mês
         $endOfWeek = $endOfMonth->copy()->endOfWeek(Carbon::SATURDAY);
         if ($endOfWeek->gt($endOfMonth)) {
@@ -207,6 +208,7 @@ class Calendar extends Component
             }
         }
     }
+    
 
     protected function addDayToCalendar(Carbon $date, $isCurrentMonth)
     {
