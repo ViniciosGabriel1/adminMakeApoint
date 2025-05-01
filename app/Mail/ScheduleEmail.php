@@ -25,4 +25,6 @@ class ScheduleEmail extends Mailable
                             'data' => $this->emailData,
                         ]);
         }
+
+        
 }
