@@ -18,7 +18,8 @@
         <div class="small-box bg-rosa-600 text-white p-3 rounded">
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <h3>R$ {{ number_format($valorTotal, 2, ',', '.') }}</h3>
+              {{-- <h3>R$ {{ number_format($valorTotal, 2, ',', '.') }}</h3> --}}
+              <h3>R$ 1000</h3>
               <p class="mb-0">Valor Total</p>
             </div>
             <i class="bi bi-cash-coin fs-1 text-white"></i> <!-- Ícone de valor total -->
