@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -16,12 +17,12 @@ class ScheduleEmail extends Mailable
         $this->emailData = $emailData;
     }
 
-    public function build()
-    {
-        return $this->subject('Teste Vinicinho')
-                    ->view('emails.teste')
-                    ->with([
-                        'data' => $this->emailData,
-                    ]);
-    }
+        public function build()
+        {
+            return $this->subject('Notificação de agendamento!')
+                        ->view('emails.teste')
+                        ->with([
+                            'data' => $this->emailData,
+                        ]);
+        }
 }

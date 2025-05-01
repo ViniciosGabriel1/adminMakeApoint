@@ -6,105 +6,130 @@
     <title>Confirmação de Agendamento</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #fff1f2;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            color: #333;
         }
+    
         .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background: white;
-            border-radius: 10px;
+            max-width: 650px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border: 1px solid #fecdd3;
         }
+    
         .header {
             background-color: #e11d48;
-            padding: 30px;
+            padding: 40px 30px;
             text-align: center;
-            color: white;
+            color: #ffffff;
         }
+    
         .header h1 {
-            margin: 0;
-            font-size: 24px;
+            font-size: 26px;
+            margin: 10px 0 0;
         }
+    
+        .logo {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+    
         .content {
-            padding: 30px;
+            padding: 35px 30px;
         }
+    
+        .content p {
+            margin: 0 0 18px;
+            font-size: 16px;
+        }
+    
+        .highlight {
+            color: #e11d48;
+            font-weight: 600;
+        }
+    
         .details {
-            background-color: #fecdd3;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
+            background-color: #fff0f3;
+            padding: 25px;
+            border-left: 5px solid #e11d48;
+            border-radius: 10px;
+            margin: 30px 0;
         }
+    
         .details-item {
-            margin-bottom: 15px;
             display: flex;
+            margin-bottom: 15px;
         }
+    
         .details-label {
-            font-weight: bold;
+            font-weight: 600;
             color: #9f1239;
-            width: 120px;
-            flex-shrink: 0;
+            width: 140px;
         }
+    
         .details-value {
             flex: 1;
         }
+    
         .service-list {
-            list-style-type: none;
-            padding: 0;
+            list-style: none;
             margin: 0;
+            padding: 0;
         }
+    
         .service-item {
-            padding: 8px 0;
-            border-bottom: 1px dashed #fb7185;
+            padding: 6px 0;
+            border-bottom: 1px dashed #fda4af;
         }
+    
         .service-item:last-child {
             border-bottom: none;
         }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #fecdd3;
-            font-size: 14px;
-            color: #9f1239;
-        }
-        .button {
-            display: inline-block;
-            background-color: #e11d48;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 15px;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 10px;
-        }
-        .highlight {
-            color: #e11d48;
-            font-weight: bold;
-        }
+    
         .total {
-            font-weight: bold;
+            margin-top: 12px;
             font-size: 16px;
-            margin-top: 10px;
+            font-weight: bold;
             color: #9f1239;
+        }
+    
+        .footer {
+            background-color: #fecdd3;
+            text-align: center;
+            padding: 18px;
+            font-size: 13px;
+            color: #9f1239;
+        }
+    
+        .button {
+            background-color: #e11d48;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+            transition: background-color 0.2s ease;
+        }
+    
+        .button:hover {
+            background-color: #be123c;
         }
     </style>
+    
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">Bella Make</div>
+            <div class="logo">Fulana MakeUp</div>
             <h1>Confirmação de Agendamento</h1>
         </div>
         
@@ -137,20 +162,24 @@
                     <div class="details-label">Horário:</div>
                     <div class="details-value">{{ $data['hora'] }}</div>
                 </div>
+                <div class="details-item">
+                    <div class="details-label">Observações:</div>
+                    <div class="details-value">{{ $data['observacoes'] }}</div>
+                </div>
               
             </div>
             
-            <p>Por favor, chegue com 10 minutos de antecedência. Caso precise reagendar ou cancelar, pedimos que nos avise com pelo menos 24 horas de antecedência.</p>
+            <p>Por favor,caso precise reagendar ou cancelar, pedimos que nos avise com pelo menos 24 horas de antecedência.</p>
                         
             <p>Atenciosamente,<br>
-            <strong>Equipe Murrinha</strong></p>
+            <strong>Fulana</strong></p>
             
         </div>
         
         <div class="footer">
-            © {{ date('Y') }} MurrinhaMake - Todos os direitos reservados<br>
-            Rua das Flores, 123 - São Paulo/SP<br>
-            (11) 98765-4321 | contato@murrinhaMake.com.br
+            © {{ date('Y') }} FulanaMakeUp - Todos os direitos reservados<br>
+            aaalgum local -MG<br>
+            (11) 98765-4321 | contato@FUlanaMake.com.br
         </div>
     </div>
 </body>

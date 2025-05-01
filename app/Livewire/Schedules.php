@@ -161,6 +161,7 @@ class Schedules extends Component
                         'preco' => number_format($servico->value, 2, ',', '.')
                     ];
                 }),
+                'observacoes' => $schedule->observacoes,
                 'valorTotal' => number_format($schedule->servicos->sum('value'), 2, ',', '.'),
                 'local' => 'Studio Bella Make - Rua das Flores, 123, Sala 302', // Pode ser dinâmico também
                 'duracao' => '3 horas' // Calcular com base nos serviços ou pegar do agendamento
@@ -169,6 +170,7 @@ class Schedules extends Component
             // dd($emailData);
     
             Mail::to($cliente->email)->send(new ScheduleEmail($emailData));
+            
         }
     }
 
