@@ -21,7 +21,7 @@ class CommandSendingRemindUser extends Command
         $email = config('mail.from.address');
 
         if ($agendamentos->isEmpty()) {
-            $this->info('Nenhum agendamento encontrado para hoje.');
+            $this->info('Nenhum agendamento encontrado para hoje. '.Carbon::parse($hoje)->format('d/m/Y H:i'));
             return;
         }
         
