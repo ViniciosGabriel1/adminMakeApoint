@@ -134,16 +134,15 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="card">
-
+                
                             <!-- Header -->
                             <div class="card-header">
-                                <h3 class="card-title">Clientes</h3>
-
+                                <h3 class="card-title mb-0">Agendamentos</h3>
+                
                                 <!-- Campo de busca -->
                                 <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input wire:model.live="search" type="text" class="form-control float-right"
-                                            placeholder="Buscar">
+                                    <div class="input-group input-group-sm" style="width: 120px;">
+                                        <input wire:model.live="search" type="text" class="form-control float-right" placeholder="Buscar">
                                         <div class="input-group-append">
                                             <button class="btn btn-default">
                                                 <i class="bi bi-search"></i>
@@ -152,10 +151,10 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Tabela -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
+                
+                            <!-- Corpo da Tabela (rolável) -->
+                            <div class="card-body table-responsive p-0" style="overflow-x: auto;">
+                                <table class="table table-hover mb-0" style="min-width: 700px; white-space: nowrap;">
                                     <thead>
                                         <tr>
                                             <th>Data</th>
@@ -167,98 +166,93 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($schedules as $schedule)
-                                            <tr>
-                                                {{-- <td>{{ $schedule->id }}</td> --}}
-                                                <td>{{ $schedule->data }}</td>
-                                                <td>{{ $schedule->hora }}</td>
-                                                <td title="{{ $schedule->observacoes }}">
-                                                    {{ Str::limit($schedule->observacoes, 50, '...') }}
-                                                </td>
-                                                <td>{{ number_format($schedule->valor_total, 2, '.', ',') }}</td>
-                                                <td>
-                                                    <button wire:click="edit({{ $schedule->id }})"
-                                                        class="btn btn-sm btn-primary">Editar</button>
-                                                    <button wire:click="confirmDelete({{ $schedule->id }})"
-                                                        class="btn btn-sm btn-danger">Excluir</button>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td>{{ $schedule->data }}</td>
+                                            <td>{{ $schedule->hora }}</td>
+                                            <td title="{{ $schedule->observacoes }}">
+                                                {{ Str::limit($schedule->observacoes, 50, '...') }}
+                                            </td>
+                                            <td>{{ number_format($schedule->valor_total, 2, '.', ',') }}</td>
+                                            <td>
+                                                <button wire:click="edit({{ $schedule->id }})" class="btn btn-sm btn-primary">Editar</button>
+                                                <button wire:click="confirmDelete({{ $schedule->id }})" class="btn btn-sm btn-danger">Excluir</button>
+                                            </td>
+                                        </tr>
                                         @empty
-                                            <tr>
-                                                <td colspan="5">Nenhum agendamento encontrado.</td>
-                                            </tr>
+                                        <tr>
+                                            <td colspan="5">Nenhum agendamento encontrado.</td>
+                                        </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
                             </div>
-
-                            <div class="mt-4 m-5">
-                                @if ($schedules->hasPages())
-                                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="mb-2">
-                                            <p class="mb-0 text-muted">
-                                                Mostrando
-                                                <strong>{{ $schedules->firstItem() }}</strong>
-                                                a
-                                                <strong>{{ $schedules->lastItem() }}</strong>
-                                                de
-                                                <strong>{{ $schedules->total() }}</strong>
-                                                resultados
-                                            </p>
-                                        </div>
-
-                                        <nav>
-                                            <ul class="pagination mb-0">
-                                                {{-- Anterior --}}
-                                                @if ($schedules->onFirstPage())
-                                                    <li class="page-item disabled">
-                                                        <span class="page-link">Anterior</span>
+                
+                            <!-- Paginação no card-footer -->
+                            @if($schedules->hasPages())
+                            <div class="card-footer bg-white">
+                                <div class="d-flex justify-content-between align-items-center flex-wrap py-2 px-3">
+                                    <small class="text-muted" style="font-size: .8rem;">
+                                        Mostrando <strong>{{ $schedules->firstItem() }}</strong> a
+                                        <strong>{{ $schedules->lastItem() }}</strong> de
+                                        <strong>{{ $schedules->total() }}</strong> resultados
+                                    </small>
+                            
+                                    <nav aria-label="Navegação de páginas">
+                                        <ul class="pagination pagination-sm mb-0 flex-nowrap" style="overflow-x: auto; white-space: nowrap;">
+                                            {{-- “Anterior” --}}
+                                            @if ($schedules->onFirstPage())
+                                                <li class="page-item disabled">
+                                                    <span class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">Anterior</span>
+                                                </li>
+                                            @else
+                                                <li class="page-item">
+                                                    <button wire:click="previousPage" class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">Anterior</button>
+                                                </li>
+                                            @endif
+                            
+                                            {{-- Apenas 3 botões em torno da página atual --}}
+                                            @php
+                                                $current = $schedules->currentPage();
+                                                $last    = $schedules->lastPage();
+                                                $start   = max(1, $current - 1);
+                                                $end     = min($last,  $current + 1);
+                                            @endphp
+                            
+                                            @for ($page = $start; $page <= $end; $page++)
+                                                @if ($page == $current)
+                                                    <li class="page-item active">
+                                                        <span class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">{{ $page }}</span>
                                                     </li>
                                                 @else
                                                     <li class="page-item">
-                                                        <button wire:click="previousPage"
-                                                            class="page-link">Anterior</button>
+                                                        <button wire:click="gotoPage({{ $page }})" class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">
+                                                            {{ $page }}
+                                                        </button>
                                                     </li>
                                                 @endif
-
-                                                {{-- Páginas --}}
-                                                @foreach ($schedules->getUrlRange(1, $schedules->lastPage()) as $page => $url)
-                                                    @if ($page == $schedules->currentPage())
-                                                        <li class="page-item active">
-                                                            <span class="page-link">{{ $page }}</span>
-                                                        </li>
-                                                    @else
-                                                        <li class="page-item">
-                                                            <button wire:click="gotoPage({{ $page }})"
-                                                                class="page-link">
-                                                                {{ $page }}
-                                                            </button>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-
-                                                {{-- Próximo --}}
-                                                @if ($schedules->hasMorePages())
-                                                    <li class="page-item">
-                                                        <button wire:click="nextPage"
-                                                            class="page-link">Próximo</button>
-                                                    </li>
-                                                @else
-                                                    <li class="page-item disabled">
-                                                        <span class="page-link">Próximo</span>
-                                                    </li>
-                                                @endif
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                @endif
+                                            @endfor
+                            
+                                            {{-- “Próximo” --}}
+                                            @if ($schedules->hasMorePages())
+                                                <li class="page-item">
+                                                    <button wire:click="nextPage" class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">Próximo</button>
+                                                </li>
+                                            @else
+                                                <li class="page-item disabled">
+                                                    <span class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">Próximo</span>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
-
-
-
-
+                            
+                            @endif
+                
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
 

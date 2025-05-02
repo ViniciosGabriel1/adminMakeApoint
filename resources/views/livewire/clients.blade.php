@@ -76,31 +76,25 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-
+                
                             <!-- Header -->
                             <div class="card-header">
-                                <h3 class="card-title">Clientes</h3>
-
-                                <!-- Campo de busca -->
+                                <h3 class="card-title mb-0">Clientes</h3>
                                 <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input wire:model.live="search" type="text" class="form-control float-right"
-                                            placeholder="Buscar">
+                                    <div class="input-group input-group-sm" style="width: 130px;">
+                                        <input wire:model.live="search" type="text" class="form-control float-right" placeholder="Buscar">
                                         <div class="input-group-append">
-                                            <button class="btn btn-default">
-                                                <i class="bi bi-search"></i>
-                                            </button>
+                                            <button class="btn btn-default"><i class="bi bi-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                
                             <!-- Tabela -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
+                            <div class="card-body table-responsive p-0" style="overflow-x: auto;">
+                                <table class="table table-hover mb-0" style="min-width: 600px; white-space: nowrap;">
                                     <thead>
                                         <tr>
-                                            {{-- <th>ID</th> --}}
                                             <th>Nome</th>
                                             <th>Email</th>
                                             <th>Telefone</th>
@@ -110,114 +104,98 @@
                                     <tbody>
                                         @forelse ($clients as $client)
                                             <tr>
-                                                {{-- <td>{{ $client->id }}</td> --}}
                                                 <td>{{ $client->name }}</td>
                                                 <td>{{ $client->email }}</td>
                                                 <td>{{ $client->phone }}</td>
                                                 <td>
-                                                    <button wire:click="edit({{ $client->id }})"
-                                                        class="btn btn-sm btn-primary">Editar</button>
-                                                    <button wire:click="confirmDelete({{ $client->id }})"
-                                                        class="btn btn-sm btn-danger">Excluir</button>
+                                                    <button wire:click="edit({{ $client->id }})" class="btn btn-sm btn-primary">Editar</button>
+                                                    <button wire:click="confirmDelete({{ $client->id }})" class="btn btn-sm btn-danger">Excluir</button>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5">Nenhum cliente encontrado.</td>
+                                                <td colspan="4">Nenhum cliente encontrado.</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
                             </div>
-
-                            <!-- Paginação -->
-                            {{-- <div class="card-footer d-flex justify-content-center">
-                                <ul class="pagination">
-                                    <!-- Link para a página anterior -->
-                                    <li class="page-item {{ $clients->onFirstPage() ? 'disabled' : '' }}">
-                                        <a class="page-link" href="{{ $clients->previousPageUrl() }}">Anterior</a>
-                                    </li>
-                            
-                                    <!-- Links das páginas -->
-                                    @foreach ($clients->getUrlRange(1, $clients->lastPage()) as $page => $url)
-                                        <li class="page-item {{ $page == $clients->currentPage() ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                        </li>
-                                    @endforeach
-                            
-                                    <!-- Link para a próxima página -->
-                                    <li class="page-item {{ $clients->hasMorePages() ? '' : 'disabled' }}">
-                                        <a class="page-link" href="{{ $clients->nextPageUrl() }}">Próxima</a>
-                                    </li>
-                                </ul>
-                            </div> --}}
-                            <div class="mt-4 m-5">
-                                @if ($clients->hasPages())
-                                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="mb-2">
-                                            <p class="mb-0 text-muted">
-                                                Mostrando
-                                                <strong>{{ $clients->firstItem() }}</strong>
-                                                a
-                                                <strong>{{ $clients->lastItem() }}</strong>
-                                                de
-                                                <strong>{{ $clients->total() }}</strong>
-                                                resultados
-                                            </p>
-                                        </div>
-
-                                        <nav>
-                                            <ul class="pagination mb-0">
-                                                {{-- Anterior --}}
-                                                @if ($clients->onFirstPage())
-                                                    <li class="page-item disabled">
-                                                        <span class="page-link">Anterior</span>
+                
+                            <!-- Paginação Compacta -->
+                            @if($clients->hasPages())
+                            <div class="card-footer bg-white py-2 px-3">
+                                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                    <small class="text-muted" style="font-size: .8rem;">
+                                        Mostrando <strong>{{ $clients->firstItem() }}</strong> a
+                                        <strong>{{ $clients->lastItem() }}</strong> de
+                                        <strong>{{ $clients->total() }}</strong> resultados
+                                    </small>
+                
+                                    <nav aria-label="Navegação de páginas">
+                                        <ul class="pagination pagination-sm mb-0 flex-nowrap" style="overflow-x: auto; white-space: nowrap;">
+                                            {{-- “Anterior” --}}
+                                            @if ($clients->onFirstPage())
+                                                <li class="page-item disabled">
+                                                    <span class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">
+                                                        Anterior
+                                                    </span>
+                                                </li>
+                                            @else
+                                                <li class="page-item">
+                                                    <button wire:click="previousPage" class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">
+                                                        Anterior
+                                                    </button>
+                                                </li>
+                                            @endif
+                
+                                            {{-- Apenas 3 botões em torno da página atual --}}
+                                            @php
+                                                $current = $clients->currentPage();
+                                                $last    = $clients->lastPage();
+                                                $start   = max(1, $current - 1);
+                                                $end     = min($last,  $current + 1);
+                                            @endphp
+                
+                                            @for ($page = $start; $page <= $end; $page++)
+                                                @if ($page == $current)
+                                                    <li class="page-item active">
+                                                        <span class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">
+                                                            {{ $page }}
+                                                        </span>
                                                     </li>
                                                 @else
                                                     <li class="page-item">
-                                                        <button wire:click="previousPage"
-                                                            class="page-link">Anterior</button>
+                                                        <button wire:click="gotoPage({{ $page }})" class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">
+                                                            {{ $page }}
+                                                        </button>
                                                     </li>
                                                 @endif
-
-                                                {{-- Páginas --}}
-                                                @foreach ($clients->getUrlRange(1, $clients->lastPage()) as $page => $url)
-                                                    @if ($page == $clients->currentPage())
-                                                        <li class="page-item active">
-                                                            <span class="page-link">{{ $page }}</span>
-                                                        </li>
-                                                    @else
-                                                        <li class="page-item">
-                                                            <button wire:click="gotoPage({{ $page }})"
-                                                                class="page-link">
-                                                                {{ $page }}
-                                                            </button>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-
-                                                {{-- Próximo --}}
-                                                @if ($clients->hasMorePages())
-                                                    <li class="page-item">
-                                                        <button wire:click="nextPage" class="page-link">Próximo</button>
-                                                    </li>
-                                                @else
-                                                    <li class="page-item disabled">
-                                                        <span class="page-link">Próximo</span>
-                                                    </li>
-                                                @endif
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                @endif
+                                            @endfor
+                
+                                            {{-- “Próximo” --}}
+                                            @if ($clients->hasMorePages())
+                                                <li class="page-item">
+                                                    <button wire:click="nextPage" class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">
+                                                        Próximo
+                                                    </button>
+                                                </li>
+                                            @else
+                                                <li class="page-item disabled">
+                                                    <span class="page-link" style="font-size: .75rem; padding: .25rem .5rem;">
+                                                        Próximo
+                                                    </span>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
-
-
-
-
+                            @endif
+                
                         </div>
                     </div>
                 </div>
+                
 
                 <!--end::Row-->
             </div>
