@@ -59,42 +59,28 @@ window.addEventListener("alert", (event) => {
 });
 
 window.addEventListener("confirm", (event) => {
-    const id_registro = event.detail.id;
+    const { id, action, title, text, confirmButtonText, cancelButtonText } = event.detail[0];
 
-    // Swal.fire({
-    //     title: "Tem certeza?",
-    //     text: "Essa ação não poderá ser desfeita!",
-    //     icon: "warning",
-    //     showCancelButton: true,
-    //     confirmButtonColor: "#d33",
-    //     cancelButtonColor: "#6c757d",
-    //     confirmButtonText: "Sim, deletar!",
-    //     cancelButtonText: "Cancelar",
-    // }).then((result) => {
-    //     if (result.isConfirmed) {
-    //         Livewire.dispatch("delete", { id: ClientId });
-    //     }
-    // });
 
     Swal.fire({
-      title: "Tem certeza?",
-      text: "Essa ação não poderá ser desfeita!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#fb7185", // Rosa para o botão de confirmação
-      cancelButtonColor: "#9f1239",  // Rosa claro para o botão de cancelar (ou um tom neutro)
-      confirmButtonText: "Sim, deletar!",
-      cancelButtonText: "Cancelar",
-      color: "#fb7185", // Cor do texto
-      iconColor: "#fb7185", // Cor do ícone
-      background: "#fff", // Fundo branco
-      customClass: {
-          popup: 'swal-popup-outline' // Classe opcional para personalizações extras via CSS
-      }
-  }).then((result) => {
-      if (result.isConfirmed) {
-          Livewire.dispatch("delete", { id: id_registro });
-      }
-  });
-  
+        title: title || "Tem certeza?",
+        text: text || "Essa ação não poderá ser desfeita!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#fb7185",
+        cancelButtonColor: "#9f1239",
+        confirmButtonText: confirmButtonText || "Sim, deletar!",
+        cancelButtonText: cancelButtonText || "Cancelar",
+        color: "#fb7185",
+        iconColor: "#fb7185",
+        background: "#fff",
+        customClass: {
+            popup: 'swal-popup-outline'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Livewire.dispatch(action, { id: id });
+        }
+    });
 });
+
