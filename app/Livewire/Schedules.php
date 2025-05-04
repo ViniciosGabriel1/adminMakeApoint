@@ -177,11 +177,32 @@ class Schedules extends Component
     $this->resetForm();
 }
 
-    public function confirmDelete($id)
-    {
+public function confirmDelete($id)
+{
+    $this->dispatch('confirm', [
+        'id' => $id,
+        'action' => 'delete',
+        'title' => 'Tem certeza que deseja excluir?',
+        'text' => 'Essa ação não poderá ser desfeita!',
+        'confirmButtonText' => 'Sim, excluir!',
+        'cancelButtonText' => 'Cancelar',
+        'icon' => 'warning'
+    ]);
+}
 
-        $this->dispatch('confirm', id: $id);
-    }
+
+public function confirmConclusion($id)
+{
+    $this->dispatch('confirm', [
+        'id' => $id,
+        'action' => 'conclusion',
+        'title' => 'Deseja concluir este agendamento?',
+        'text' => 'Após concluir, não será possível editar o agendamento.',
+        'confirmButtonText' => 'Sim, concluir!',
+        'cancelButtonText' => 'Cancelar',
+        'icon' => 'info'
+    ]);
+}
 
 
     public function edit($id)
@@ -201,7 +222,7 @@ class Schedules extends Component
 
 
 
-    protected $listeners = ['delete'];
+    protected $listeners = ['delete','conclusion'];
 
     public function delete($id)
     {
@@ -214,6 +235,21 @@ class Schedules extends Component
             'text' => 'Agendamento deletado com sucesso!',
         ]);
     }
+
+    
+    public function conclusion($id)
+    {
+        $schedule = ModelSchedules::findOrFail($id);
+        $schedule->status = 'confirmed'; // Define o status como concluído
+        $schedule->save();
+    
+        $this->dispatch('alert', [
+            'icon' => 'success',
+            'title' => 'Concluído',
+            'text' => 'Agendamento concluído com sucesso!',
+        ]);
+    }
+    
 
     public function resetForm()
     {

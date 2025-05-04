@@ -10,7 +10,8 @@ class Schedules extends Model
         'data',
         'hora',
         'observacoes',
-        'valor_total'
+        'valor_total',
+        'status'
     ];
 
     public function cliente()
