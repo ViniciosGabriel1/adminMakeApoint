@@ -21,6 +21,19 @@ body {
 /* SIDEBAR */
 /* ==================== */
 
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.5rem;
+    padding: 0.8125rem 0.5rem;
+    overflow: hidden;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    border-bottom: 1px solid rgb(192, 192, 192);
+    transition: width 0.3s ease-in-out;
+  }
+
 .bg-custom-sidebar {
     background-color: $rosa;
     color: white;

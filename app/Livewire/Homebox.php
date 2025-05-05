@@ -18,7 +18,7 @@ class Homebox extends Component
         return view('livewire.homebox', [
             'clientes' => Clients::where('user_id',auth()->id())->count(),
             'servicos' => Services::where('user_id',auth()->id())->count(),
-            'valorTotal' => schedules::all()->sum('valor_total'),
+            'valorTotal' => schedules::where('status','confirmed')->sum('valor_total'),
             'schedules' => Schedules::all()->count(),
         ]);
     }

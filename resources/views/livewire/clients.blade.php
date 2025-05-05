@@ -60,10 +60,10 @@
                                     <div class="col-md-4">
                                         <label for="telefone" class="form-label">Telefone</label>
                                         <input
-                                        type="text"
+                                        type="number"
                                         class="form-control"
                                         id="telefone"
-                                        wire:model.lazy="phone"
+                                        wire:model="phone"
                                         placeholder="exemplo 81995995959"
                                     />
                                         @error('phone')
