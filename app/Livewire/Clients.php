@@ -22,17 +22,27 @@ class Clients extends Component
     protected $rules = [
         'name'  => 'required|string|max:255',
         'email' => 'required|email|max:255',
-        'phone' => 'required|string|max:20',
+        'phone' => 'required|digits:11',
     ];
 
+    protected $messages = [
+        'name.required'  => 'O nome é obrigatório.',
+        'name.string'    => 'O nome deve ser um texto.',
+        'name.max'       => 'O nome não pode ultrapassar 255 caracteres.',
+
+        'email.required' => 'O e-mail é obrigatório.',
+        'email.email'    => 'Informe um e-mail válido.',
+        'email.max'      => 'O e-mail não pode ultrapassar 255 caracteres.',
+
+        'phone.required' => 'O telefone é obrigatório.',
+        'phone.digits'   => 'O telefone deve conter exatamente 11 dígitos numéricos.',
+    ];
 
     public function save()
     {
 
-
-        // dd($this->phone);
-        // preg_replace('/\D/', '', $this->phone)
         $this->validate();
+        // dd($this->phone);
 
         ModelsClients::updateOrCreate(
             ['id' => $this->clientId], // esse campo deve ser setado no modo de edição
@@ -64,7 +74,8 @@ class Clients extends Component
     }
 
 
-    public function confirmDelete($id) {
+    public function confirmDelete($id)
+    {
 
         $this->dispatch('confirm', id: $id);
     }
@@ -76,7 +87,7 @@ class Clients extends Component
     {
         $client = ModelsClients::findOrFail($id);
 
-        
+
         $this->clientId = $client->id;
         $this->name     = $client->name;
         $this->email    = $client->email;
@@ -110,7 +121,7 @@ class Clients extends Component
     public function render()
     {
         $clients = ModelsClients::where('name', 'like', '%' . $this->search . '%')
-            ->where('user_id',auth()->id())
+            ->where('user_id', auth()->id())
             ->orderBy('name')
             ->paginate(3)
             ->withQueryString(); // <-- Isso mantém a URL base

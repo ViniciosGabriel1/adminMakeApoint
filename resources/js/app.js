@@ -8,12 +8,8 @@ import {
     ClickScrollPlugin,
 } from "overlayscrollbars";
 
-if (!window.Alpine) {
-    import('alpinejs').then((module) => {
-        window.Alpine = module.default;
-        Alpine.start();
-    });
-}
+
+
 
 
 const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";

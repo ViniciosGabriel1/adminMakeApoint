@@ -170,11 +170,11 @@
                                         @forelse ($schedules as $schedule)
                                             <tr>
                                                 <td>{{ $schedule->data }}</td>
-                                                <td>{{ $schedule->hora }}</td>
+                                                <td>{{\Carbon\Carbon::parse($schedule->hora)->format('H:i')}}</td>
                                                 <td title="{{ $schedule->observacoes }}">
                                                     {{ Str::limit($schedule->observacoes, 50, '...') }}
                                                 </td>
-                                                <td>{{ number_format($schedule->valor_total, 2, '.', ',') }}</td>
+                                                <td>{{ number_format($schedule->valor_total, 2, ',', '.') }}</td>
 
                                                 {{-- NOVO CAMPO STATUS COM ESTILIZAÇÃO --}}
                                                 <td>

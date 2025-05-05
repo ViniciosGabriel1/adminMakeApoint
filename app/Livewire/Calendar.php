@@ -32,17 +32,17 @@ class Calendar extends Component
     {
         $eventArray = json_decode($event, true);
     
-        $messagem = "🎉 Olá, *" . $eventArray['name_client'] . "*!\n";
-        $messagem .= "Seu agendamento no KaRAJO foi confirmado com sucesso!\n\n";
+        $messagem = "🎯 Olá, *" . $eventArray['name_client'] . "*!\n";
+        $messagem .= "Aqui é *".auth()->user()->name."* 💇‍♀️\n";
+        $messagem .= "Estou passando só pra te lembrar do seu agendamento! ✨\n\n";
         $messagem .= "📅 *Data:* " . date('d/m/Y', strtotime($eventArray['data'])) . "\n";
         $messagem .= "🕒 *Horário:* " . $eventArray['hora'] . "\n";
-        // $messagem .= "📍 *Local:* Studio Glam - Rua das Flores, 123 - Centro, São Paulo/SP\n\n";
-        $messagem .= "💇‍♀️ *Serviço:* " . $eventArray['service'] . "\n";
-        $messagem .= "💰 *Valor:* R$ " . number_format($eventArray['valor_total'], 2, ',', '.') . "\n";
+        $messagem .= "💄 *Serviço(s):* " . $eventArray['service'] . "\n";
+        $messagem .= "💰 *Valor Total:* R$ " . number_format($eventArray['valor_total'], 2, ',', '.') . "\n";
         $messagem .= "📝 *Observações:* " . ($eventArray['observacoes'] ? $eventArray['observacoes'] : "Nenhuma") . "\n\n";
-        $messagem .= "Qualquer dúvida, estamos à disposição.\n";
-        $messagem .= "Até breve! ✨";
-    
+        $messagem .= "Se precisar remarcar ou tiver qualquer dúvida, é só me avisar!\n";
+        $messagem .= "Estou te esperando no dia com tudo pronto 💖\n\n";
+        $messagem .= "Até breve! 😊";
         // Dados para envio
         $numero = '55'.$eventArray['phone']; // deve estar no formato internacional, ex: 5591999999999
         // dd($numero);
