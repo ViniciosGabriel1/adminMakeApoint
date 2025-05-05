@@ -1,5 +1,7 @@
 <div>
     <main class="app-main">
+
+        
         <!--begin::App Content Header-->
         <div class="app-content-header">
             <!--begin::Container-->
@@ -57,11 +59,18 @@
 
                                     <div class="col-md-4">
                                         <label for="telefone" class="form-label">Telefone</label>
-                                        <input type="text" class="form-control" id="telefone" wire:model="phone" />
+                                        <input
+                                        type="text"
+                                        class="form-control"
+                                        id="telefone"
+                                        wire:model.lazy="phone"
+                                        placeholder="exemplo 81995995959"
+                                    />
                                         @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    
                                 </div>
                             </div>
 
@@ -203,4 +212,8 @@
         </div>
         <!--end::App Content-->
     </main>
+
+    
 </div>
+
+
