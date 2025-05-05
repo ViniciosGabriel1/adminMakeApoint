@@ -86,7 +86,7 @@
                     </a>
                 </li>
 
-                <div style="position: absolute; bottom: 0; width: 80%; margin: 10px">
+                <div style="position: absolute; bottom: 0; width: 80%; margin-bottom: 22px">
                     <ul class="nav sidebar-menu flex-column">
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}">
