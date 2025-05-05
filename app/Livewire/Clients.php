@@ -28,6 +28,10 @@ class Clients extends Component
 
     public function save()
     {
+
+
+        // dd($this->phone);
+        // preg_replace('/\D/', '', $this->phone)
         $this->validate();
 
         ModelsClients::updateOrCreate(
@@ -36,7 +40,7 @@ class Clients extends Component
                 'user_id' => auth()->id(),
                 'name'  => $this->name,
                 'email' => $this->email,
-                'phone' => $this->phone,
+                'phone' => $this->phone
             ]
         );
 
@@ -71,6 +75,8 @@ class Clients extends Component
     public function edit($id)
     {
         $client = ModelsClients::findOrFail($id);
+
+        
         $this->clientId = $client->id;
         $this->name     = $client->name;
         $this->email    = $client->email;

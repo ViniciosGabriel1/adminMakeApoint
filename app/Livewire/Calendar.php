@@ -8,9 +8,6 @@ use Carbon\Carbon;
 use App\Models\Schedules as ModelsSchedules;
 use Twilio\Rest\Client;
 
-// use Twilio\Rest\Client;
-
-
 
 class Calendar extends Component
 {
@@ -34,33 +31,57 @@ class Calendar extends Component
     public function msg($event)
     {
         $eventArray = json_decode($event, true);
-        // dd($eventArray);
-
-        $sid = env('TWILIO_SID');
-        $numero_com_55 = '+55' . $eventArray['phone'];
-        $token = env('TWILIO_TOKEN');
-        $twilio = new Client($sid, $token);
-
-
-        $messagem = "🎉 Olá, **" . $eventArray['name_client'] . "**!\n";
-        $messagem .= "Seu agendamento do KaRAJO foi confirmado com sucesso!\n\n";
-        $messagem .= "📅 **Data**: " . date('d/m/Y', strtotime($eventArray['data'])) . "\n";
-        $messagem .= "🕒 **Horário**: " . $eventArray['hora'] . "\n";
-        $messagem .= "📍 **Local**: Studio Glam - Rua das Flores, 123 - Centro, São Paulo/SP\n\n";
-        $messagem .= "💇‍♀️ **Serviço**: " . $eventArray['service'] . "\n";
-        $messagem .= "💰 **Valor**: R$ " . number_format($eventArray['valor_total'], 2, ',', '.') . "\n";
-        $messagem .= "📝 **Observações**: " . ($eventArray['observacoes'] ? $eventArray['observacoes'] : "Nenhuma") . "\n\n";
+    
+        $messagem = "🎉 Olá, *" . $eventArray['name_client'] . "*!\n";
+        $messagem .= "Seu agendamento no KaRAJO foi confirmado com sucesso!\n\n";
+        $messagem .= "📅 *Data:* " . date('d/m/Y', strtotime($eventArray['data'])) . "\n";
+        $messagem .= "🕒 *Horário:* " . $eventArray['hora'] . "\n";
+        // $messagem .= "📍 *Local:* Studio Glam - Rua das Flores, 123 - Centro, São Paulo/SP\n\n";
+        $messagem .= "💇‍♀️ *Serviço:* " . $eventArray['service'] . "\n";
+        $messagem .= "💰 *Valor:* R$ " . number_format($eventArray['valor_total'], 2, ',', '.') . "\n";
+        $messagem .= "📝 *Observações:* " . ($eventArray['observacoes'] ? $eventArray['observacoes'] : "Nenhuma") . "\n\n";
         $messagem .= "Qualquer dúvida, estamos à disposição.\n";
         $messagem .= "Até breve! ✨";
     
-
-        $message = $twilio->messages
-            ->create("whatsapp:" . $numero_com_55, [
-                "from" => env('TWILIO_WHATSAPP_FROM'),
-                "body" => $messagem
+        // Dados para envio
+        $numero = '55'.$eventArray['phone']; // deve estar no formato internacional, ex: 5591999999999
+        // dd($numero);
+        $payload = json_encode([
+            "number" => $numero,
+            "text" => $messagem,
+            "delay" => 0
+        ]);
+    
+        // Enviando via cURL
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "http://localhost:8080/message/sendText/Vini",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => $payload,
+            CURLOPT_HTTPHEADER => [
+                "Content-Type: application/json",
+                "apikey: 429683C4C977415CAAFCCE10F7D57E11"
+            ],
+        ]);
+    
+        $response = curl_exec($curl);
+        // dd($response);
+        $err = curl_error($curl);
+        curl_close($curl);
+    
+        if ($err) {
+            $this->dispatch('alert', [
+                'icon' => 'error',
+                'title' => 'Erro',
+                'text'  => 'Erro ao enviar lembrete: ' . $err,
+                'position' => 'center'
             ]);
-
-        if ($message) {
+        } else {
             $this->dispatch('alert', [
                 'icon' => 'success',
                 'title' => 'Enviado',
@@ -69,94 +90,10 @@ class Calendar extends Component
             ]);
         }
     }
+    
     public function loadEvents()
     {
-        // Substitua isso por sua lógica de carregamento de eventos
-        // // Pode ser do banco de dados ou outra fonte
-        // $this->events = [
-        //     [
-        //         'id' => 1,
-        //         'date' => Carbon::now()->format('Y-m-d'),
-        //         'time' => '09:00',
-        //         'title' => 'Maquiagem Social',
-        //         'description' => 'Cliente: Ana Silva - Duração: 1h30',
-        //         'type' => 'social',
-        //         'status' => 'confirmed'
-        //     ],
-        //     [
-        //         'id' => 1,
-        //         'date' => Carbon::now()->format('Y-m-d'),
-        //         'time' => '09:00',
-        //         'title' => 'Maquiagem Social',
-        //         'description' => 'Cliente: Ana Silva - Duração: 1h30',
-        //         'type' => 'social',
-        //         'status' => 'confirmed'
-        //     ],
-        //     [
-        //         'id' => 1,
-        //         'date' => Carbon::now()->format('Y-m-d'),
-        //         'time' => '09:00',
-        //         'title' => 'Maquiagem Social',
-        //         'description' => 'Cliente: Ana Silva - Duração: 1h30',
-        //         'type' => 'social',
-        //         'status' => 'confirmed'
-        //     ],
-        //     [
-        //         'id' => 1,
-        //         'date' => Carbon::now()->format('Y-m-d'),
-        //         'time' => '09:00',
-        //         'title' => 'Maquiagem Social',
-        //         'description' => 'Cliente: Ana Silva - Duração: 1h30',
-        //         'type' => 'social',
-        //         'status' => 'confirmed'
-        //     ],
-        //     [
-        //         'id' => 2,
-        //         'date' => Carbon::now()->format('Y-m-d'),
-        //         'time' => '14:00',
-        //         'title' => 'Maquiagem Noiva',
-        //         'description' => 'Cliente: Maria Oliveira - Pré-wedding',
-        //         'type' => 'bridal',
-        //         'status' => 'confirmed'
-        //     ],
-        //     [
-        //         'id' => 3,
-        //         'date' => Carbon::now()->addDays(1)->format('Y-m-d'),
-        //         'time' => '10:30',
-        //         'title' => 'Maquiagem Artística',
-        //         'description' => 'Cliente: Carla Santos - Evento corporativo',
-        //         'type' => 'artistic',
-        //         'status' => 'pending'
-        //     ],
-        //     [
-        //         'id' => 4,
-        //         'date' => Carbon::now()->addDays(2)->format('Y-m-d'),
-        //         'time' => '16:00',
-        //         'title' => 'Maquiagem Editorial',
-        //         'description' => 'Cliente: Revista Beauty - Sessão fotográfica',
-        //         'type' => 'editorial',
-        //         'status' => 'confirmed'
-        //     ],
-        //     [
-        //         'id' => 5,
-        //         'date' => Carbon::now()->addDays(3)->format('Y-m-d'),
-        //         'time' => '11:00',
-        //         'title' => 'Aula de Automaquiagem',
-        //         'description' => 'Cliente: Grupo de 5 pessoas',
-        //         'type' => 'workshop',
-        //         'status' => 'confirmed'
-        //     ],
-        //     [
-        //         'id' => 6,
-        //         'date' => Carbon::now()->addDays(5)->format('Y-m-d'),
-        //         'time' => '13:30',
-        //         'title' => 'Maquiagem para Festa',
-        //         'description' => 'Cliente: Juliana Costa - Aniversário de 15 anos',
-        //         'type' => 'party',
-        //         'status' => 'confirmed'
-        //     ]
-        // ];
-
+    
 
         $this->events = ModelsSchedules::with(['cliente', 'servicos'])->get()->map(function ($schedule) {
             return [
