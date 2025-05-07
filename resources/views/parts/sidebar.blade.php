@@ -7,7 +7,7 @@
         <a href="{{ url('/') }}" class="brand-link" aria-label="Página inicial">
             <!-- Logo da Marca -->
             <img 
-                src="{{ Vite::asset('resources/images/Gleyce.png') }}" 
+                src="{{ Vite::asset('resources/images/agendamake.png') }}" 
                 alt="Logo da Make Appointment" 
                 class="brand-image rounded-3"
                 style="width: 50px; height: 50px;"
@@ -15,11 +15,12 @@
         
             <!-- Nome da Marca -->
             <span class="brand-text fw-light">
-                Gleyce MakeUp
+                MakeAgenda
             </span>
         </a>
         <!--end::Brand Link-->
     </div>
+    
     
     <!--end::Sidebar Brand-->
     <!--begin::Sidebar Wrapper-->

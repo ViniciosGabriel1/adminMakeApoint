@@ -8,15 +8,8 @@
     <div class="register-box">
   
         <div class="register-logo">
-            <a class="text-white" style="display: flex; flex-direction: column; align-items: center;">
-                <img 
-                    src="{{ Vite::asset('resources/images/Gleyce.png') }}" 
-                    alt="Logo da Gleyce MakeUp" 
-                    class="brand-image rounded-3"
-                    style="width: 200px; height: 160px; margin-bottom: 10px;"
-                >
-                {{-- <span><b>Gleyce</b>MakeUp</span> --}}
-            </a>
+            <x-logo/>
+
         </div>
         <!-- /.register-logo -->
         <div class="card">

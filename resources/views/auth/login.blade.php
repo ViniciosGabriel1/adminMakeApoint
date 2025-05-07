@@ -7,15 +7,8 @@
 @section('content')
     <div class="login-box">
         <div class="login-logo">
-            <a class="text-white" style="display: flex; flex-direction: column; align-items: center;">
-                <img 
-                    src="{{ Vite::asset('resources/images/Gleyce.png') }}" 
-                    alt="Logo da Gleyce MakeUp" 
-                    class="brand-image rounded-3"
-                    style="width: 200px; height: 160px; margin-bottom: 10px;"
-                >
-                {{-- <span><b>Gleyce</b>MakeUp</span> --}}
-            </a>
+
+            <x-logo/>
         </div>
         <!-- /.login-logo -->
         <div class="card">
