@@ -83,7 +83,6 @@
 <body>
   <div class="container">
     <div class="header">
-      <div class="logo">Fulana MakeUp</div>
       <h1>Seus Agendamentos de Hoje</h1>
     </div>
     <div class="content">
@@ -94,7 +93,7 @@
       <div class="agendamento">
         <p><strong>Cliente:</strong> {{ $agendamento['cliente_nome'] }}</p>
         <p><strong>Horário:</strong> {{ $agendamento['hora'] }}</p>
-        <p><strong>Observações:</strong> {{ $agendamento['observacoes'] ?? 'Nenhuma' }}</p>
+        <p><strong>Observações:</strong> {{'Nenhuma' }}</p>
 
         <div class="servicos">
           <strong>Serviços:</strong>
@@ -108,13 +107,11 @@
       @endforeach
 
       <p>Tenha um ótimo dia de atendimentos! ✨</p>
-      <p><strong>AgendaShow</strong></p>
     </div>
 
     <div class="footer">
-      © {{ date('Y') }} FulanaMakeUp - Todos os direitos reservados<br>
-      aaalgum local - MG<br>
-      (11) 98765-4321 | contato@fulanamake.com.br
+      © {{ date('Y') }} GleyceMakeUp - Todos os direitos reservados<br>
+      (11) 98765-4321 | contato@gleycemake.com.br
     </div>
   </div>
 </body>

@@ -1,18 +1,27 @@
 @extends('layouts.auth')
 @section('title', 'Faça seu Cadastro!')
 
-@section('body-class', 'register-page')
+@section('body-class', 'register-page bg-rosa')
 
 @section('content')
 
     <div class="register-box">
+  
         <div class="register-logo">
-            <a href="../index2.html"><b>Admin</b>LTE</a>
+            <a class="text-white" style="display: flex; flex-direction: column; align-items: center;">
+                <img 
+                    src="{{ Vite::asset('resources/images/Gleyce.png') }}" 
+                    alt="Logo da Gleyce MakeUp" 
+                    class="brand-image rounded-3"
+                    style="width: 200px; height: 160px; margin-bottom: 10px;"
+                >
+                {{-- <span><b>Gleyce</b>MakeUp</span> --}}
+            </a>
         </div>
         <!-- /.register-logo -->
         <div class="card">
             <div class="card-body register-card-body">
-                <p class="register-box-msg">Register a new membership</p>
+                <p class="register-box-msg text-rosa"><b>Cadastre-se aqui.</b></p>
                 <form action="{{ route('register') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
@@ -55,7 +64,7 @@
                         <!-- /.col -->
                         <div class="col-12">
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Sign In</button>
+                                <button type="submit" class="btn btn-rosa">Sign In</button>
                             </div>
                         </div>
                         <!-- /.col -->
@@ -64,8 +73,8 @@
                 </form>
 
                 <!-- /.social-auth-links -->
-                <p class="mb-0">
-                    <a href="login.html" class="text-center"> I already have a membership </a>
+                <p class="mt-3">
+                    <a href="{{route('login')}}" class=" text-center text-rosa"> Já tenho uma conta. </a>
                 </p>
             </div>
         </div>
