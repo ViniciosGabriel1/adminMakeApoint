@@ -2,17 +2,25 @@
 
 @section('title', 'Faça seu Login!')
 
-@section('body-class', 'login-page')
+@section('body-class', 'login-page bg-rosa')
 
 @section('content')
     <div class="login-box">
         <div class="login-logo">
-            <a href="../index2.html"><b>Admin</b>LTE</a>
+            <a class="text-white" style="display: flex; flex-direction: column; align-items: center;">
+                <img 
+                    src="{{ Vite::asset('resources/images/Gleyce.png') }}" 
+                    alt="Logo da Gleyce MakeUp" 
+                    class="brand-image rounded-3"
+                    style="width: 200px; height: 160px; margin-bottom: 10px;"
+                >
+                {{-- <span><b>Gleyce</b>MakeUp</span> --}}
+            </a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+            <div class="card-body login-card-body rounded-5">
+                <p class="login-box-msg text-rosa"><b>Faça login para acessar o sistema aqui!</b></p>
                 @session('status')
                     <div class="alert alert-success" role="alert">
                         {{ $value }}
@@ -45,7 +53,7 @@
                         <!-- /.col -->
                         <div class="col-12">
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Sign In</button>
+                                <button type="submit" class="btn btn-rosa">Sign In</button>
                             </div>
                         </div>
                         <!-- /.col -->
@@ -54,9 +62,9 @@
                 </form>
 
                 <!-- /.social-auth-links -->
-                <p class="mb-1"><a href="{{route('password.request')}}">I forgot my password</a></p>
-                <p class="mb-0">
-                    <a href="{{route('register')}}" class="text-center"> Register a new membership </a>
+                <p class="m-1"><a class="text-rosa" href="{{route('password.request')}}">Esqueci minha senha.</a></p>
+                <p class="mt-2">
+                    <a href="{{route('register')}}" class="text-center text-rosa"> Cadastra-se </a>
                 </p>
             </div>
             <!-- /.login-card-body -->
