@@ -9,10 +9,10 @@ import {
 } from "overlayscrollbars";
 
 // resources/js/app.js
-import Alpine from 'alpinejs'
+// import Alpine from 'alpinejs'
 
-window.Alpine = Alpine
-Alpine.start()
+// window.Alpine = Alpine
+// Alpine.start()
 
 
 
@@ -39,6 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // import './bootstrap';
+
+window.addEventListener('whatsapp-connected', () => {
+    alert("WhatsApp conectado com sucesso!");
+});
 
 window.addEventListener("alert", (event) => {
     let data = event.detail;
@@ -69,6 +73,7 @@ window.addEventListener("alert", (event) => {
 });
 
 window.addEventListener("confirm", (event) => {
+    console.log("🚀 ~ window.addEventListener ~ event:", event)
     const { id, action, title, text, confirmButtonText, cancelButtonText } = event.detail[0];
 
 
@@ -88,9 +93,19 @@ window.addEventListener("confirm", (event) => {
             popup: 'swal-popup-outline'
         }
     }).then((result) => {
+        console.log("🚀 ~ window.addEventListener ~ result:", result)
         if (result.isConfirmed) {
             Livewire.dispatch(action, { id: id });
         }
     });
 });
 
+
+window.addEventListener("qrCodeGenerated", (qrCodeUrl) => {
+
+    // Este código será executado quando o evento for emitido e o QR Code for gerado
+    console.log('QR Code generated:', qrCodeUrl);
+    //  o DOM ou faça outras ações aqui, se necessário
+
+
+});

@@ -135,6 +135,12 @@
                     <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('manage-whatsapp')}}"  aria-label="WhatsApp">
+                    <i class="bi bi-whatsapp"></i>
+                </a>
+            </li>
+            
             <!--end::Fullscreen Toggle-->
             <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu">
@@ -163,6 +169,7 @@
                     <!--begin::Menu Footer-->
                     <li class="user-footer bg-rosa-light d-flex justify-content-between align-items-center p-3">
                         <a href="#" class="btn bg-rosa-600 text-white btn-sm rounded">Profile</a>
+                        <a href="#" class="btn bg-rosa-600 text-white btn-sm rounded">Conectar Whatsapp</a>
                         <form action="{{ route('logout') }}" method="post" class="m-0">
                             @csrf
                             <button type="submit" class="btn bg-rosa-800 text-white btn-sm rounded">Logout</button>

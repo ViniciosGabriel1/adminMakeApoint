@@ -144,6 +144,7 @@ class Schedules extends Component
 
     // Envia o e-mail apenas se for novo agendamento
     if (empty($this->agendamentoId)) {
+        
         $dataFormatada = \Carbon\Carbon::parse($schedule->data)->format('d/m/Y');
         $horaFormatada = \Carbon\Carbon::parse($schedule->hora)->format('H:i');
         

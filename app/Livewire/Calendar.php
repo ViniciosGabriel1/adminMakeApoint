@@ -55,7 +55,7 @@ class Calendar extends Component
         // Enviando via cURL
         $curl = curl_init();
         curl_setopt_array($curl, [
-            CURLOPT_URL => "http://localhost:8080/message/sendText/Vini",
+            CURLOPT_URL => "http://localhost:8080/message/sendText/Gleyce81994028271",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
