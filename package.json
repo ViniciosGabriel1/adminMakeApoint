@@ -18,6 +18,7 @@
         "@alpinejs/mask": "^3.14.9",
         "@popperjs/core": "^2.11.8",
         "admin-lte": "^4.0.0-beta3",
+        "alpinejs": "^3.14.9",
         "bootstrap": "^5.3.3",
         "bootstrap-icons": "^1.11.3",
         "overlayscrollbars": "^2.10.1"

@@ -6,9 +6,9 @@
 @section('content')
 
     <div class="register-box">
-  
+
         <div class="register-logo">
-            <x-logo/>
+            <x-logo />
 
         </div>
         <!-- /.register-logo -->
@@ -19,7 +19,7 @@
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                            placeholder="Full Name" value="{{old('name')}}"  />
+                            placeholder="Full Name" value="{{ old('name') }}" />
 
                         <div class="input-group-text"><span class="bi bi-person"></span></div>
                         @error('name')
@@ -27,29 +27,38 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
+                        <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
+                            placeholder="Phone" value="{{ old('phone') }}" />
+                        <div class="input-group-text"><span class="bi bi-telephone"></span></div>
+                        @error('phone')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                            placeholder="Email" value="{{old('email')}}" />
+                            placeholder="Email" value="{{ old('email') }}" />
                         <div class="input-group-text"><span class="bi bi-envelope"></span></div>
                         @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                            placeholder="Password" value="{{old('password')}}"/>
+                            placeholder="Password" value="{{ old('password') }}" />
                         <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
                         @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" name="password_confirmation"
                             class="form-control @error('password_confirmation') is-invalid @enderror"
-                            placeholder="Password-confirmation" value="{{old('password_confirmation')}}" />
+                            placeholder="Password-confirmation" value="{{ old('password_confirmation') }}" />
                         <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
                         @error('password_confirmation')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <!--begin::Row-->
                     <div class="row">
@@ -67,7 +76,7 @@
 
                 <!-- /.social-auth-links -->
                 <p class="mt-3">
-                    <a href="{{route('login')}}" class=" text-center text-rosa"> Já tenho uma conta. </a>
+                    <a href="{{ route('login') }}" class=" text-center text-rosa"> Já tenho uma conta. </a>
                 </p>
             </div>
         </div>

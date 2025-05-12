@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\ManageWhatsappController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ServicesController;
 use App\Mail\ScheduleEmail;
@@ -24,8 +26,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/servicos', [ServicesController::class, 'index'])->name('services');
     Route::get('/agendamentos', [ScheduleController::class, 'index'])->name('schedules');
-});
+    Route::get('gerenciar-whatsapp',[ManageWhatsappController::class,'index'])->name('manage-whatsapp');
+    });
 
+    // Route::post('/webhook/whatsapp', [WebhookController::class, 'handle']);
 
 
 Route::get('/teste-email', function () {
@@ -35,3 +39,5 @@ Route::get('/teste-email', function () {
 
     return 'E-mail enviado com sucesso!';
 });
+
+// Route::post('/api/webhook/baileys', [WebhookController::class, 'handle']);
