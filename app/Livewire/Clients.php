@@ -76,8 +76,17 @@ class Clients extends Component
 
     public function confirmDelete($id)
     {
-
-        $this->dispatch('confirm', id: $id);
+        // dd($id);
+        // $this->dispatch('confirm', id: $id);
+         $this->dispatch('confirm', [
+        'id' => $id,
+        'action' => 'delete',
+        'title' => 'Tem certeza que deseja excluir?',
+        'text' => 'Essa ação não poderá ser desfeita!',
+        'confirmButtonText' => 'Sim, excluir!',
+        'cancelButtonText' => 'Cancelar',
+        'icon' => 'warning'
+    ]);
     }
 
 
