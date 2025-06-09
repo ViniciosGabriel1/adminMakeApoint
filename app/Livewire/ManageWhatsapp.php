@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\WhatsappInstance;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ManageWhatsapp extends Component
@@ -36,7 +37,9 @@ class ManageWhatsapp extends Component
             'readStatus'       => true,
             'syncFullHistory'  => true,
             'webhook' => [
-                'url' => 'https://3a7b-2804-3124-800c-cfa0-19f7-54e1-32d3-3598.ngrok-free.app/api/webhook/baileys',
+                'url' => 'https://aba4-2804-3124-800c-cfa0-41d0-1c7f-5f63-867f.ngrok-free.app/api/webhook/baileys',
+                 //PROD
+               // url' => 'https://vinishow.com.br/api/webhook/baileys',
                 'byEvents'  => false,
                 'base64'    => true,
                 'headers'   => [
@@ -59,6 +62,8 @@ class ManageWhatsapp extends Component
         curl_setopt_array($curl, [
             CURLOPT_URL => env('WHATSAPP_URL_CREATE_INSTANCE'),
             // CURLOPT_URL => "http://localhost:8080/message/sendText/Vini",
+            //PROD CURLOPT_URL => "https://show-evolution-api.hcgy4s.easypanel.host/instance/create", // HTTPS!
+
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -115,10 +120,12 @@ class ManageWhatsapp extends Component
 
     public function getQRCode()
     {
-        $serverUrl = 'http://localhost:8080'; // Ex: https://api.exemplo.com
-        $instance = auth()->user()->name . auth()->user()->phone ?? 'default-instance'; // ou defina como preferir
+        //PROD $serverUrl = 'http://show-evolution-api.hcgy4s.easypanel.host'; // Ex: https://api.exemplo.com
 
-        $url = "{$serverUrl}/instance/connect/{$instance}";
+
+        $instance = auth()->user()->name . auth()->user()->phone ?? 'default-instance'; // ou defina como preferir
+        // dd($instance);
+        $url = "http://localhost:8080/instance/connect/{$instance}";
 
         $curl = curl_init();
 
@@ -157,6 +164,8 @@ class ManageWhatsapp extends Component
         }
     }
 
+
+    #[On('echo:updateConnection,updateStatusConnection')]
     public function mount()
     {
         $instance = WhatsappInstance::where('user_id', auth()->id())->first();
@@ -179,6 +188,8 @@ class ManageWhatsapp extends Component
 
     public function disconnect()
     {
+                //PROD $serverUrl = 'http://show-evolution-api.hcgy4s.easypanel.host'; // Ex: https://api.exemplo.com
+
         $serverUrl = 'http://localhost:8080'; // Ex: https://api.exemplo.com
         $instance = auth()->user()->name . auth()->user()->phone ?? 'default-instance'; // ou defina como preferir
 
@@ -199,16 +210,19 @@ class ManageWhatsapp extends Component
             ],
         ]);
 
+
         $response = curl_exec($curl);
         $err = curl_error($curl);
 
         curl_close($curl);
 
-        if ($err) {
-            session()->flash('error', "Erro ao desconectar: $err");
-        } else {
-            session()->flash('success', 'Desconectado com sucesso.');
-        }
+
+        $this->dispatch('alert', [
+            'icon' => 'success',
+            'title' => 'Desconectado',
+            'text'  => 'Whatsapp desconectado com sucesso!',
+            'position' => 'center'
+        ]);
     }
 
 
