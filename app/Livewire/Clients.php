@@ -21,8 +21,8 @@ class Clients extends Component
     // Regras de validação
     protected $rules = [
         'name'  => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'phone' => 'required|digits:11',
+        'email' => 'email|max:255',
+        'phone' => 'required',
     ];
 
     protected $messages = [
@@ -30,7 +30,7 @@ class Clients extends Component
         'name.string'    => 'O nome deve ser um texto.',
         'name.max'       => 'O nome não pode ultrapassar 255 caracteres.',
 
-        'email.required' => 'O e-mail é obrigatório.',
+        // 'email.required' => 'O e-mail é obrigatório.',
         'email.email'    => 'Informe um e-mail válido.',
         'email.max'      => 'O e-mail não pode ultrapassar 255 caracteres.',
 
@@ -127,18 +127,27 @@ class Clients extends Component
         return view('livewire.placeholders.loading');
     }
 
-    public function render()
-    {
-        $clients = ModelsClients::where('name', 'like', '%' . $this->search . '%')
-            ->where('user_id', auth()->id())
-            ->orderBy('name')
-            ->paginate(3)
-            ->withQueryString(); // <-- Isso mantém a URL base
-        // dd($clients);
-
-        // sleep(5);
-        return view('livewire.clients', [
-            'clients' => $clients
-        ])->layout('layouts.default');
+   public function render()
+{
+    $query = ModelsClients::where('user_id', auth()->id())
+                ->orderBy('name');
+    
+    // Busca mais abrangente e eficiente
+    if (!empty($this->search)) {
+        $query->where(function($q) {
+            $q->where('name', 'like', '%'.$this->search.'%')
+              ->orWhere('email', 'like', '%'.$this->search.'%')
+              ->orWhere('phone', 'like', '%'.$this->search.'%');
+        });
     }
+    
+    // Seleciona apenas os campos necessários
+    $clients = $query->select(['id', 'name', 'email', 'phone', 'created_at'])
+               ->paginate($this->perPage ?? 10)
+               ->withQueryString();
+
+    return view('livewire.clients', [
+        'clients' => $clients
+    ])->layout('layouts.default');
+}
 }
